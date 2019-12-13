@@ -10,6 +10,7 @@ public class Reservation {
 
 		
 private static int id=100;
+private int oldId;
 private	 int userid;
 private	int hotelid;
 private	String iscancelld;
@@ -34,19 +35,24 @@ private String hotelname;//
 	}
 	
 	//databaseden çekileni göstermek için
-	public Reservation( String Hotelname,Date startdate, Date enddate,int numberofroom, String roomtype) {
+	public Reservation( String Hotelname,Date startdate, Date enddate,int numberofroom, String roomtype,int id) {
 	
 	    this.hotelname=Hotelname;
 		this.startdate =startdate;
 		this.enddate =enddate ;
 		this.numberofroom =numberofroom ;
 		this.roomtype=roomtype;
+		this.oldId=id;
 	}
 	
 	
 	
 	public static int getId() {
 		return id;
+	}
+	
+	public int getOldId() {
+		return oldId;
 	}
 	
 	public int getUserid() {
@@ -97,6 +103,7 @@ private String hotelname;//
 	public void setHotelName(String hotelname) {
 		this.hotelname = hotelname;
 	}
+	
 	
 	
 	

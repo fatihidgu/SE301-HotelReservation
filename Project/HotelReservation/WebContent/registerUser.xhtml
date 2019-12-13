@@ -27,8 +27,10 @@
 <h:form id="menu" style="margin-top: 2%; border: 1px solid black; width: 100%">
     <p:growl id="msgs" showDetail="true" />
     <p:tabView orientation="left" style="height: auto">
+    
+    
         <p:tab title="Account Information">
-        	<h:commandButton value="edit" style="margin-left:3%; height: 25px" type="submit" action="#{user.goLoginPage}" />
+        	<h:commandButton value="edit" style="margin-left:3%; height: 25px" type="submit" action="editUserInfo.xhtml" />
             <h:panelGrid columns="2" cellpadding="10">
             <p:dataTable var="regUser" value="#{RegUserBean.regUser}">
             	<p:column headerText="Name">
@@ -51,10 +53,26 @@
     			</p:column>
 			</p:dataTable>
             </h:panelGrid>
-            <h:commandButton value="Delete my account" style="margin-left:3%; height: 25px" type="submit" action="#{user.goLoginPage}" />
+                			   
+    			  
+<p:growl id="message" showDetail="true" />  
+<p:commandButton value="Delete my account" actionListener="#{reservationssBean.SendDeleteRequest()}" update="message">  
+<p:confirm header="Confirmation" message="Are you sure you want to send a request to admin to delete your account?" icon="ui-icon-alert" />  
+</p:commandButton>  
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  
+<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+</p:confirmDialog>  
+
+        		
+        		
         </p:tab>
+        
+        
+        
         <p:tab title="Reservations">
             <h:panelGrid columns="2" cellpadding="10">
+           <h:panelGroup  id="tablo">
             	<p:dataTable var="reservationss" value="#{reservationssBean.reservationss}">
     			<p:column headerText="Hotel name">
         			<h:outputText value="#{reservationss.hotelname}" />
@@ -72,11 +90,22 @@
         			<h:outputText value="#{reservationss.roomtype}" />
     			</p:column>
     			   	<p:column>
-        			<h:commandButton value="Cancel" style="margin-left:3%; height: 25px" type="submit" action="#{user.goLoginPage}" />
+    			  
+<p:growl id="message" showDetail="true" />  
+<p:commandButton value="Cancel" actionListener="#{reservationssBean.delete(reservationss.oldId)}" update="message"  action="#{reservationssBean.reload()}">  
+<p:confirm header="Confirmation" message="Are you sure you want to cancel this Reservation?" icon="ui-icon-alert" />  
+</p:commandButton>  
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  
+<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+</p:confirmDialog>  
+
         		</p:column>
 				</p:dataTable>
+				   </h:panelGroup>
             </h:panelGrid>
             </p:tab>
+        
         
         <p:tab title="Past Reservations">
             <h:panelGrid columns="2" cellpadding="10">
@@ -96,13 +125,9 @@
     			<p:column headerText="Room type">
         			<h:outputText value="#{pastreservationss.roomtype}" />
     			</p:column>
-    			   <p:column>
-        			<h:commandButton value="Cancel" style="margin-left:3%; height: 25px" type="submit" action="#{user.goLoginPage}" />
-        		</p:column>
 				</p:dataTable>
             </h:panelGrid>
-            
-        </p:tab>
+             </p:tab>
         
        
         

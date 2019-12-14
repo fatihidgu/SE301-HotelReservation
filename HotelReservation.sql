@@ -1,3 +1,4 @@
+CREATE SCHEMA `hotelreservation` ;
 CREATE TABLE users (
 userid  integer not null,
 email varchar(25) not null unique,
@@ -13,6 +14,7 @@ lastname varchar(15) not null,
 pnumber integer,
 gender varchar(6),
 bdate date not null,
+balance int not null,
 issendrequest char(1) not null,
 primary key (rid),
 foreign key (rid) references users(userid) on update cascade

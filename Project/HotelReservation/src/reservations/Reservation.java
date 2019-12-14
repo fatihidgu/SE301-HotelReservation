@@ -46,7 +46,6 @@ private String hotelname;//
 	}
 	
 	
-	
 	public static int getId() {
 		return id;
 	}

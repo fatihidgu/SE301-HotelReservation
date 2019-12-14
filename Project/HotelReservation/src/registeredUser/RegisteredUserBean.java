@@ -4,11 +4,14 @@ import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean (name="RegUserBean")
-@SessionScoped
+@RequestScoped
 public class RegisteredUserBean {
 	private List<RegisteredUser> regUser = new ArrayList<>();
 	
@@ -16,10 +19,10 @@ public class RegisteredUserBean {
 		try {
 			
 			 PreparedStatement preStatement = getConnectionDB().prepareStatement(" SELECT r.namee, r.lastname, u.email, r.pnumber,r.bdate,r.gender\r\n" + 
-		        		"	            FROM registereduser r, users u\r\n" +
+		        		"	        FROM registereduser r, users u\r\n" +
 		      		"	            WHERE u.email=? AND u.userid = r.rid ");
  
-          preStatement.setString(1, "g"); //buraya login olmuþ kullanýcýnýn emaili gelecek
+          preStatement.setString(1, "furki@gmail.com"); //buraya login olmuþ kullanýcýnýn emaili gelecek
           ResultSet rs = preStatement.executeQuery();
 		    
 		    
@@ -44,7 +47,7 @@ public void SendDeleteRequest() {
 	        		"	            FROM registereduser r, users u\r\n" +
 	      		"	            WHERE u.email=? AND u.userid = r.rid ");
 
-       preStatement.setString(1, "g"); //buraya login olmuþ kullanýcýnýn emaili gelecek
+       preStatement.setString(1, "furki@gmail.com"); //buraya login olmuþ kullanýcýnýn emaili gelecek
 
        ResultSet rs = preStatement.executeQuery();
 	    int UserId=-1;
@@ -59,6 +62,7 @@ public void SendDeleteRequest() {
 	      preparedStmt.setInt  (1, UserId);
 	    
 	      preparedStmt.executeUpdate();
+	      addMessage("Send Request","a request to admin to delete your account sent");  
 	    }
 		
 	      
@@ -66,6 +70,11 @@ public void SendDeleteRequest() {
 	
 		
 	}
+
+public void addMessage(String summary, String detail) {  
+	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);  
+	FacesContext.getCurrentInstance().addMessage(null, message);  
+	} 
 
 
 private Connection getConnectionDB() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {

@@ -6,6 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
@@ -33,7 +34,7 @@ public class ReservationBean {
 	                "WHERE u.email=? and u.userid = r.rid and res.userid=r.rid and res.hotelid=h.hid and res.enddate >= ? and res.iscancelld ='0' ");
 
 
-	preStatement.setString(1, "g");//buraya login olmuþ kullanýcýnýn emaili gelecek
+	preStatement.setString(1, "furki@gmail.com");//buraya login olmuþ kullanýcýnýn emaili gelecek
 	preStatement.setString(2, Today);
 	ResultSet rs = preStatement.executeQuery();
 		    
@@ -65,11 +66,13 @@ public class ReservationBean {
 	      preparedStmt.setInt   (1, id);
 	    
 	      preparedStmt.executeUpdate();
+	     
 	      
 		}catch(Exception  ex) {}
 	
 		
 	}
+	
 	
 	public void reload() throws IOException {
 	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();

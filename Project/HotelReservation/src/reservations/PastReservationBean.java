@@ -28,7 +28,7 @@ public class PastReservationBean {
 	                "WHERE u.email=? and u.userid = r.rid and res.userid=r.rid and res.hotelid=h.hid and res.enddate <= ?  and res.iscancelld ='0'");
 
 
-	preStatement.setString(1, "g");//buraya login olmuş kullanıcının emaili gelecek
+	preStatement.setString(1, "furki@gmail.com");//buraya login olmuş kullanıcının emaili gelecek
 	preStatement.setString(2, Today);
 	ResultSet rs = preStatement.executeQuery();
 		    

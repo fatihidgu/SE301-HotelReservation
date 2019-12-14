@@ -56,7 +56,7 @@
                 			   
     			  
 <p:growl id="message" showDetail="true" />  
-<p:commandButton value="Delete my account" actionListener="#{reservationssBean.SendDeleteRequest()}" update="message">  
+<p:commandButton value="Delete my account" actionListener="#{RegUserBean.SendDeleteRequest()}" update="message">  
 <p:confirm header="Confirmation" message="Are you sure you want to send a request to admin to delete your account?" icon="ui-icon-alert" />  
 </p:commandButton>  
 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  

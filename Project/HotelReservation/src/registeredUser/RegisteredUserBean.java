@@ -14,15 +14,13 @@ public class RegisteredUserBean {
 	
 	public RegisteredUserBean() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-		    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/hotelreservation", "root", "");
-		    
-			 PreparedStatement preStatement = connection.prepareStatement(" SELECT r.namee, r.lastname, u.email, r.pnumber,r.bdate,r.gender\r\n" + 
+			
+			 PreparedStatement preStatement = getConnectionDB().prepareStatement(" SELECT r.namee, r.lastname, u.email, r.pnumber,r.bdate,r.gender\r\n" + 
 		        		"	            FROM registereduser r, users u\r\n" +
 		      		"	            WHERE u.email=? AND u.userid = r.rid ");
  
-preStatement.setString(1, "g"); //buraya login olmuþ kullanýcýnýn emaili gelecek
- ResultSet rs = preStatement.executeQuery();
+          preStatement.setString(1, "g"); //buraya login olmuþ kullanýcýnýn emaili gelecek
+          ResultSet rs = preStatement.executeQuery();
 		    
 		    
 		    while(rs.next()){
@@ -36,4 +34,44 @@ preStatement.setString(1, "g"); //buraya login olmuþ kullanýcýnýn emaili gelecek
 	public List<RegisteredUser> getRegUser() {
 		return regUser;
 	}
+	
+public void SendDeleteRequest() {
+		
+		try {	
+	    
+	    //elimizdeki mail ile user id yi buluyoruz
+		 PreparedStatement preStatement = getConnectionDB().prepareStatement(" SELECT r.rid \r\n" + 
+	        		"	            FROM registereduser r, users u\r\n" +
+	      		"	            WHERE u.email=? AND u.userid = r.rid ");
+
+       preStatement.setString(1, "g"); //buraya login olmuþ kullanýcýnýn emaili gelecek
+
+       ResultSet rs = preStatement.executeQuery();
+	    int UserId=-1;
+	    
+	    while(rs.next()){
+	    	UserId= rs.getInt(1);
+       }
+	    
+	    if(UserId !=-1) { 
+	      String query = "UPDATE `hotelreservation`.`registereduser` SET `issendrequest` = '1' WHERE (`rid` = ?);";
+	      PreparedStatement preparedStmt = getConnectionDB().prepareStatement(query);
+	      preparedStmt.setInt  (1, UserId);
+	    
+	      preparedStmt.executeUpdate();
+	    }
+		
+	      
+		}catch(Exception  ex) {}
+	
+		
+	}
+
+
+private Connection getConnectionDB() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	Class.forName("com.mysql.jdbc.Driver").newInstance();
+    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/hotelreservation", "root", "");
+    return connection;
+	
+}
 }

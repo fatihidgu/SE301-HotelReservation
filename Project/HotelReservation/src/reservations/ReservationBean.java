@@ -76,34 +76,7 @@ public class ReservationBean {
 	    ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
 	}
 	
-public void SendDeleteRequest() {
-		
-		try {	
-	    
-	    //elimizdeki mail ile user id yi buluyoruz
-		 PreparedStatement preStatement = getConnectionDB().prepareStatement(" SELECT r.rid \r\n" + 
-	        		"	            FROM registereduser r, users u\r\n" +
-	      		"	            WHERE u.email=? AND u.userid = r.rid ");
 
-preStatement.setString(1, "g"); //buraya login olmuþ kullanýcýnýn emaili gelecek
-ResultSet rs = preStatement.executeQuery();
-	    int UserId=-1;
-	    
-	    while(rs.next()){
-	    	UserId= rs.getInt(1);
-       }
-	    
-	    
-		String query = "UPDATE `hotelreservation`.`registereduser` SET `issendrequest` = '1' WHERE (`rid` = ?);";
-	      PreparedStatement preparedStmt = getConnectionDB().prepareStatement(query);
-	      preparedStmt.setInt  (1, UserId);
-	    
-	      preparedStmt.executeUpdate();
-	      
-		}catch(Exception  ex) {}
-	
-		
-	}
 	
 	 
 }

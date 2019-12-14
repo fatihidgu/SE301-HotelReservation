@@ -67,6 +67,7 @@ startdate date not null,
 enddate date not null,
 numberofroom integer not null,
 roomtype char(1) not null,
+cost int not null,
 primary key (id),
 foreign key (hotelid) references hotel(hid) on update cascade,
 foreign key (userid) references registereduser(rid) on update cascade

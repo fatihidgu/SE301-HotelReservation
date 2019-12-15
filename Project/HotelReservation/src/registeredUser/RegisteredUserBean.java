@@ -24,7 +24,7 @@ public class RegisteredUserBean {
 		        		"	        FROM registereduser r, users u\r\n" +
 		      		"	            WHERE u.email=? AND u.userid = r.rid ");
  
-          preStatement.setString(1, User.email); //buraya login olmuþ kullanýcýnýn emaili gelecek
+          preStatement.setString(1, User.email); 
           ResultSet rs = preStatement.executeQuery();
 		    
 		    

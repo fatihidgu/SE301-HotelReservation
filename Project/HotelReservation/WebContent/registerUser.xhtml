@@ -43,7 +43,7 @@
     			<p:column headerText="Email">
         			<h:outputText value="#{regUser.email}" />
     			</p:column>
-    			<p:column headerText="Phone Number">
+    			<p:column headerText="Phone Number      ">
         			<h:outputText value="#{regUser.pnumber}" />
     			</p:column>
     			<p:column headerText="Birth Date">
@@ -51,6 +51,9 @@
     			</p:column>
     			<p:column headerText="Gender">
         			<h:outputText value="#{regUser.gender}" />
+    			</p:column>
+    			<p:column headerText="Balance">
+        			<h:outputText value="#{regUser.balance}" />
     			</p:column>
 			</p:dataTable>
             </h:panelGrid>
@@ -67,8 +70,6 @@
 
        
         </p:tab>
-        
-        
         
         <p:tab title="Reservations">
             <h:panelGrid columns="2" cellpadding="10">
@@ -89,10 +90,13 @@
     			<p:column headerText="Room type">
         			<h:outputText value="#{reservationss.roomtype}" />
     			</p:column>
+    				<p:column headerText="Cost">
+        			<h:outputText value="#{reservationss.cost}" />
+    			</p:column>
     			   	<p:column>
     			  
 <p:growl id="message" showDetail="true" />  
-<p:commandButton value="Cancel" actionListener="#{reservationssBean.delete(reservationss.oldId)}" update="message"  action="#{reservationssBean.reload()}">  
+<p:commandButton value="Cancel" actionListener="#{reservationssBean.delete(reservationss.oldId , reservationss.cost)}" update="message"  action="#{reservationssBean.reload()}">  
 <p:confirm header="Confirmation" message="Are you sure you want to cancel this Reservation?" icon="ui-icon-alert" />  
 </p:commandButton>  
 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  
@@ -124,6 +128,9 @@
     			</p:column>
     			<p:column headerText="Room type">
         			<h:outputText value="#{pastreservationss.roomtype}" />
+    			</p:column>
+    			<p:column headerText="Cost">
+        			<h:outputText value="#{pastreservationss.cost}" />
     			</p:column>
 				</p:dataTable>
             </h:panelGrid>

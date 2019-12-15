@@ -19,11 +19,12 @@ private	Date enddate; //
 private	int numberofroom; //
 private	String roomtype;//
 private String hotelname;//
+private Double cost;
 	
 	
     public Reservation() {}
 	//normal reservation oluþtururken
-	public Reservation(int userid,int hotelid,Date startdate, Date enddate, int numberofroom, String roomtype) {
+	public Reservation(int userid,int hotelid,Date startdate, Date enddate, int numberofroom, String roomtype,Double cost) {
 		id++;
 		this.userid=userid ;
 		this.hotelid=hotelid ;
@@ -32,10 +33,11 @@ private String hotelname;//
 		this.enddate =enddate ;
 		this.numberofroom =numberofroom ;
 		this.roomtype=roomtype;
+		this.cost = cost;
 	}
 	
 	//databaseden çekileni göstermek için
-	public Reservation( String Hotelname,Date startdate, Date enddate,int numberofroom, String roomtype,int id) {
+	public Reservation( String Hotelname,Date startdate, Date enddate,int numberofroom, String roomtype,int id,Double cost) {
 	
 	    this.hotelname=Hotelname;
 		this.startdate =startdate;
@@ -43,6 +45,7 @@ private String hotelname;//
 		this.numberofroom =numberofroom ;
 		this.roomtype=roomtype;
 		this.oldId=id;
+		this.cost = cost;
 	}
 	
 	
@@ -101,6 +104,12 @@ private String hotelname;//
 	}
 	public void setHotelName(String hotelname) {
 		this.hotelname = hotelname;
+	}
+	public Double getCost() {
+		return cost;
+	}
+	public void setCost(Double cost) {
+		this.cost = cost;
 	}
 	
 	

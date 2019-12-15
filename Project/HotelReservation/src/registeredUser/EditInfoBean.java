@@ -13,6 +13,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
+import user.User;
+
 @ManagedBean (name="EditInBean")
 @SessionScoped
 public class EditInfoBean {
@@ -33,7 +35,7 @@ public class EditInfoBean {
 		        	"	        FROM registereduser r, users u\r\n" +
 		      		"	        WHERE u.email=? AND u.userid = r.rid ");
 
-                preStatement.setString(1, "furki@gmail.com"); //buraya login olmuþ kullanýcýnýn emaili gelecek
+                preStatement.setString(1, User.email); //buraya login olmuþ kullanýcýnýn emaili gelecek
                 ResultSet rs = preStatement.executeQuery();
 		    
 		    
@@ -59,13 +61,13 @@ public class EditInfoBean {
 			  String query = "UPDATE `hotelreservation`.`users` SET `email` = ? WHERE (`email` = ?);";
 		      PreparedStatement preparedStmt = getConnectionDB().prepareStatement(query);
 		      preparedStmt.setString  (1, email);
-		      preparedStmt.setString  (2, "furki@gmail.com");
+		      preparedStmt.setString  (2, User.email);
 		    
 		      preparedStmt.executeUpdate();
 			 
 			 
 			 
-			    // mail ile user id yi buluyoruz
+			   /* // mail ile user id yi buluyoruz
 				 PreparedStatement preStatement = getConnectionDB().prepareStatement(" SELECT r.rid \r\n" + 
 			        		"	            FROM registereduser r, users u\r\n" +
 			      		"	            WHERE u.email=? AND u.userid = r.rid ");
@@ -77,12 +79,14 @@ public class EditInfoBean {
 			    
 			    while(rs.next()){
 			    	UserId= rs.getInt(1);
-		       }
+		       }*/
+		      
+		      
 			    
 			    String bday = birthDate.getYear()+1900+"."+(birthDate.getMonth()+1)+"."+birthDate.getDate();
 			    
 			    //diðer bilgiler deðiþiyor
-			    if(UserId !=-1) { 
+			    
 			      String query2 = "UPDATE `hotelreservation`.`registereduser` SET `namee` = ?, `lastname` = ?, `pnumber` = ?, `gender` = ?, `bdate` = ? WHERE (`rid` = ?);";
 			      PreparedStatement preparedStmt2 = getConnectionDB().prepareStatement(query2);
 			      preparedStmt2.setString  (1,name );
@@ -90,18 +94,16 @@ public class EditInfoBean {
 			      preparedStmt2.setString  (3,pnumber);
 			      preparedStmt2.setString  (4,gender);
 			      preparedStmt2.setString  (5,bday);
-			      preparedStmt2.setInt     (6,UserId);
+			      preparedStmt2.setInt     (6,User.userid);
 			      
 	
 			      preparedStmt2.executeUpdate();
 			
-			    }
+			    
 				
 			      
 				}catch(Exception  ex) { System.out.println(ex);}
-		 
-		 
-	 }
+		 }
 	
 
 		private Connection getConnectionDB() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
@@ -161,7 +163,6 @@ public class EditInfoBean {
 		this.gender = gender;
 	}
 
-	
 	
 	public EditInfoBean() {
 	

@@ -3,8 +3,6 @@ package hotelOwnerHotels;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-@ManagedBean (name="hoHotels")
-@RequestScoped 
 public class hoHotels {
 	private String name;
 	private String location;
@@ -17,6 +15,8 @@ public class hoHotels {
 	private int vroomp;
 	private char isactive;
 	private char isaccepted;
+	private int oldid;
+	private String hemail;
 	
 	public hoHotels(String name, String location, int quality, int costs, int vrooms, int coste, int vroome, int costp, int vroomp, char isactive, char isaccepted) {
 		this.name = name;
@@ -30,6 +30,14 @@ public class hoHotels {
 		this.vroomp = vroomp;
 		this.isactive = isactive;
 		this.isaccepted = isaccepted;
+	}
+	public hoHotels(String name, String location,String email, int oldid) {
+		//admin özel
+		this.name = name;
+		this.location = location;
+		this.oldid=oldid;
+		this.hemail=email;
+		
 	}
 	
 	public String getName() {
@@ -75,4 +83,18 @@ public class hoHotels {
 	public char getIsaccepted() {
 		return isaccepted;
 	}
+	public int getOldid() {
+		return oldid;
+	}
+	public void setOldid(int oldid) {
+		this.oldid = oldid;
+	}
+	public String getHemail() {
+		return hemail;
+	}
+	public void setHemail(String hemail) {
+		this.hemail = hemail;
+	}
+
+
 }

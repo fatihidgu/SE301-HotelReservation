@@ -5,8 +5,7 @@ import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-@ManagedBean (name="hoInfo")
-@RequestScoped 
+
 public class hoInfo {
 	private String name;
 	private String lastName;
@@ -14,6 +13,7 @@ public class hoInfo {
 	private int pnumber;
 	private Date birthDate;
 	private String gender;
+	private int oldid;
 	
 	public hoInfo(String name, String lastName, String email, int pnumber, Date birthDate, String gender) {
 		this.name = name;
@@ -22,6 +22,13 @@ public class hoInfo {
 		this.pnumber = pnumber;
 		this.birthDate = birthDate;
 		this.gender = gender;
+	}
+	public hoInfo(String name, String lastName, String email,int id) {
+		//admin özel
+		this.name = name;
+		this.lastName = lastName;
+		this.email = email;
+		this.oldid=id;
 	}
 	
 	public String getName() {
@@ -46,5 +53,8 @@ public class hoInfo {
 	
 	public String getGender() {
 		return gender;
+	}
+	public int getOldid() {
+		return oldid;
 	}
 }

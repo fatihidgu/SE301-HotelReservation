@@ -7,25 +7,24 @@ import javax.faces.bean.RequestScoped;
 
 
 public class Reservation {
-
 		
-private static int id=100;
-private int oldId;
+private  int id;
 private	 int userid;
 private	int hotelid;
 private	String iscancelld;
-private	Date startdate; //
-private	Date enddate; //
-private	int numberofroom; //
-private	String roomtype;//
-private String hotelname;//
-private Double cost;
+private	Date startdate; 
+private	Date enddate; 
+private	int numberofroom; 
+private	String roomtype;
+private String hotelname;
+private int cost;
 	
-	
+private int oldId;
+
     public Reservation() {}
 	//normal reservation oluþtururken
-	public Reservation(int userid,int hotelid,Date startdate, Date enddate, int numberofroom, String roomtype,Double cost) {
-		id++;
+	public Reservation(int id,int userid,int hotelid,Date startdate, Date enddate, int numberofroom, String roomtype,int cost) {
+		this.id=id;
 		this.userid=userid ;
 		this.hotelid=hotelid ;
 		this.iscancelld="0" ;
@@ -37,7 +36,7 @@ private Double cost;
 	}
 	
 	//databaseden çekileni göstermek için
-	public Reservation( String Hotelname,Date startdate, Date enddate,int numberofroom, String roomtype,int id,Double cost) {
+	public Reservation( String Hotelname,Date startdate, Date enddate,int numberofroom, String roomtype,int id,int cost) {
 	
 	    this.hotelname=Hotelname;
 		this.startdate =startdate;
@@ -49,8 +48,12 @@ private Double cost;
 	}
 	
 	
-	public static int getId() {
+	public int getId() {
 		return id;
+	}
+	
+	public void setId(int id) {
+		this.hotelid = id;
 	}
 	
 	public int getOldId() {
@@ -105,10 +108,10 @@ private Double cost;
 	public void setHotelName(String hotelname) {
 		this.hotelname = hotelname;
 	}
-	public Double getCost() {
+	public int getCost() {
 		return cost;
 	}
-	public void setCost(Double cost) {
+	public void setCost(int cost) {
 		this.cost = cost;
 	}
 	

@@ -30,7 +30,6 @@
     
     
         <p:tab title="Account Information">
-         
         	<h:commandButton value="edit" style="margin-left:3%; height: 25px"  action="editUserInfo.xhtml" />
             <h:panelGrid columns="2" cellpadding="10">
             <p:dataTable var="regUser" value="#{RegUserBean.regUser}" >
@@ -52,9 +51,7 @@
     			<p:column headerText="Gender">
         			<h:outputText value="#{regUser.gender}" />
     			</p:column>
-    			<p:column headerText="Balance">
-        			<h:outputText value="#{regUser.balance}" />
-    			</p:column>
+    		
 			</p:dataTable>
             </h:panelGrid>
                 			   

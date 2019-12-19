@@ -25,20 +25,44 @@
 </h:form>
 </h:body>
 
-
-
 <h:form id="makeReservationForm" style="margin-top: 2%; border: 1px solid black; width: 100%; height: 600px"  >
  
-
 <div style="width: 40%; margin-left: 13%; margin-top: 3%">
-	<div style="margin-top: 3%"><div style="float: left"><h:outputText value="Beginning Date " style="font-size: 14pt"></h:outputText></div><div style="float: right"><p:inputText value="" /></div></div><br/>
-	<div style="margin-top: 5%"><div style="float: left"><h:outputText value="Ending Date " style="font-size: 14pt"></h:outputText></div><div style="float: right"><p:inputText value="" /></div></div><br/>
-	<div style="margin-top: 5%"><div style="float: left"><h:outputText value="Room Type " style="font-size: 14pt"></h:outputText></div><div style="float: right"><p:inputText value="" /></div></div><br/>
-	<div style="margin-top: 3%"><div style="float: left"><h:outputText value="Number of rooms: " style="font-size: 14pt"></h:outputText></div><div style="float: right"><p:inputText value="" /></div></div><br/>
+	<div style="margin-top: 3%"><div style="float: left"><h:outputText value="Beginning Date " style="font-size: 14pt"></h:outputText></div><div style="float: right"><p:calendar id="startDate" value="#{MakeResBean.startdate}" pattern="yyyy-MM-dd" mindate="today" maxdate="#{MakeResBean.enddate}">
+     <p:ajax event="dateSelect" update="endDate"/>
+</p:calendar></div></div><br/>
+	<div style="margin-top: 5%"><div style="float: left"><h:outputText value="Ending Date " style="font-size: 14pt"></h:outputText></div><div style="float: right"><p:calendar  id="endDate" value="#{MakeResBean.enddate}" pattern="yyyy-MM-dd" mindate="#{MakeResBean.startdate}" >
+      <p:ajax event="dateSelect" update="startDate"/>
+ </p:calendar></div></div><br/>
+
+
+<p:growl id="msgs" showDetail="true" />
+<h:panelGrid columns="2" cellpadding="5">  
+
+
+<p:outputLabel for="roomtype" value="Room type " />  
+<p:selectOneMenu id="roomtype" value="#{MakeResBean.roomtype}" style="width:150px">  
+<p:ajax listener="#{MakeResBean.onChange}" update="numberofroom" />  
+
+<f:selectItems value="#{MakeResBean.roommap}" />  
+</p:selectOneMenu>  
+<p:outputLabel for="numberofroom" value="Number of rooms " />  
+<p:selectOneMenu id="numberofroom" value="#{MakeResBean.numberofroom}" style="width:150px">  
+
+<f:selectItems value="#{MakeResBean.numbermap}" />  
+</p:selectOneMenu>  
+</h:panelGrid>  
+<p:separator />  
+
+
+
 </div>
 
 <br/>
-<h:commandButton value="PAY" style="float: right;  margin-top: 2%; margin-right: 8%" type="submit" action="#{user.goLoginPage}" />
+
+   
+ <h:commandButton value="PAY" style="float: right; height: 25px; margin-top: 2%; margin-right: 8%"  actionListener="#{MakeResBean.takeReservationInfo(MakeResBean.numberofroom,MakeResBean.roomtype,MakeResBean.startdate,MakeResBean.enddate)}" action="pay.xhtml" />
+   
 </h:form>
 
 

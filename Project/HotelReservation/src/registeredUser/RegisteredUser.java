@@ -5,17 +5,20 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 public class RegisteredUser {
+	private int id;
 	private String name;
 	private String lastName;
 	private String email;
 	private int pnumber;
 	private Date birthDate;
 	private String gender;
-	private int oldid;
-	private Double balance;
+	private String isSendRequest;
+	private int balance;
 	
+	private int oldid; //admin
 	
-	public RegisteredUser(String name, String lastName, String email, int pnumber, Date birthDate, String gender,Double balance) {
+	//yeni oluþturmak için
+	 public RegisteredUser(int id,String name, String lastName, String email, int pnumber, Date birthDate, String gender,int balance) {
 		this.name = name;
 		this.lastName = lastName;
 		this.email = email;
@@ -23,6 +26,18 @@ public class RegisteredUser {
 		this.birthDate = birthDate;
 		this.gender = gender;
 		this.balance=balance;
+		this.isSendRequest = "0";
+	}
+	
+	//ekrana basmak için
+	public RegisteredUser(String name, String lastName, String email, int pnumber, Date birthDate, String gender) {
+		this.name = name;
+		this.lastName = lastName;
+		this.email = email;
+		this.pnumber = pnumber;
+		this.birthDate = birthDate;
+		this.gender = gender;
+		
 	}
 	
 	//Admin kullanýyor
@@ -63,11 +78,11 @@ public class RegisteredUser {
 		return oldid;
 	}
 
-	public Double getBalance() {
+	public int getBalance() {
 		return balance;
 	}
 
-	public void setBalance(Double balance) {
+	public void setBalance(int balance) {
 		this.balance = balance;
 	}
 	

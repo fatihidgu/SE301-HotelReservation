@@ -26,7 +26,7 @@ public class ReservationBean {
 		try {
 			
 		    
-  Date d = new Date();
+            Date d = new Date();
 		    
 		    String Today = d.getYear()+1900+"."+(d.getMonth()+1)+"."+d.getDate();
 		   
@@ -41,7 +41,7 @@ public class ReservationBean {
 		    
 		    while(rs.next()){ 
 		    	
-		    	reservationss.add(new Reservation(rs.getString(1), rs.getDate(2), rs.getDate(3), rs.getInt(4), rs.getString(5),rs.getInt(6),rs.getDouble(7)));
+		    	reservationss.add(new Reservation(rs.getString(1), rs.getDate(2), rs.getDate(3), rs.getInt(4), rs.getString(5),rs.getInt(6),rs.getInt(7)));
 	        }
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -69,7 +69,7 @@ public class ReservationBean {
 	    
 	      preparedStmt.executeUpdate();
 	      
-	      //para iadesi
+	      //yeni balance hesapla
 	         PreparedStatement preStatement = getConnectionDB().prepareStatement(" SELECT r.balance FROM registereduser r, users u WHERE u.email=? AND u.userid = r.rid ");
              preStatement.setString(1, User.email); 
              ResultSet rs = preStatement.executeQuery();
@@ -81,19 +81,119 @@ public class ReservationBean {
 		     
 		     balance = balance+cost;
 		    
-		     //refund
-		    
+		     //para iadesi
 		      String query2 = "UPDATE `hotelreservation`.`registereduser` SET `balance` = ? WHERE (`rid` = ?);";
 		      PreparedStatement preparedStmt2 = getConnectionDB().prepareStatement(query2);
 		      preparedStmt2.setDouble  (1,balance );
 		      preparedStmt2.setInt     (2,User.userid);
 		      
               preparedStmt2.executeUpdate();
+              getConnectionDB().close();
+              changeRoomNumber(id);
 		
 		  }catch(Exception  ex) {}
 	
 		
 	}
+	
+public void changeRoomNumber(int resid){
+		
+	try{
+				int hotelid =0;
+			String roomtype ="";
+			int canceledRoomNo = 0;
+			
+			  PreparedStatement preStatement = getConnectionDB().prepareStatement(" SELECT res.hotelid , res.roomtype , res.numberofroom \r\n" + 
+		              "FROM reservation res \r\n" + 
+		              "WHERE res.id = ? ");
+
+
+		     preStatement.setInt(1, resid);
+		     ResultSet rs = preStatement.executeQuery();
+			 while(rs.next()){hotelid =rs.getInt(1);
+			                  roomtype =rs.getString(2);
+			                  canceledRoomNo = rs.getInt(3);}
+					
+					
+					int RoomNo=0;
+					
+					//oda sayýný bul
+					if(roomtype.equals("s")) {
+						PreparedStatement preStatement1 = getConnectionDB().prepareStatement(" SELECT h.vrooms  \r\n" + 
+				                "FROM hotel h\r\n" + 
+				                "WHERE h.hid= ?   ");
+						
+						preStatement1.setInt(1,hotelid);
+						ResultSet rs1 = preStatement1.executeQuery();
+						while(rs1.next()){  RoomNo =	rs1.getInt(1);}
+						
+					
+					}
+					
+					else if(roomtype.equals("e")) {
+						PreparedStatement preStatement2 = getConnectionDB().prepareStatement(" SELECT h.vroome  \r\n" + 
+				                "FROM hotel h\r\n" + 
+				                "WHERE h.hid= ?   ");
+						
+						preStatement2.setInt(1,hotelid);
+						ResultSet rs2 = preStatement2.executeQuery();
+						while(rs2.next()){  RoomNo =	rs2.getInt(1);}
+						
+						System.out.println("e de kalan oda:"+RoomNo);
+					}
+					
+					else if(roomtype.equals("p")) {
+						PreparedStatement preStatement3 = getConnectionDB().prepareStatement(" SELECT h.vroomp  \r\n" + 
+				                "FROM hotel h\r\n" + 
+				                "WHERE h.hid= ?   ");
+						
+						preStatement3.setInt(1,hotelid);
+						ResultSet rs3 = preStatement3.executeQuery();
+						while(rs3.next()){  RoomNo =	rs3.getInt(1);}
+						
+						
+					}
+					
+					
+					/////////////////////////////////////////////oda ekle
+					RoomNo = RoomNo + canceledRoomNo;
+					
+					
+					if(roomtype.equals("s"))
+					
+					{ String query = "UPDATE `hotelreservation`.`hotel` SET `vrooms` = ? WHERE (`hid` = ?);";
+				      PreparedStatement preparedStmt = getConnectionDB().prepareStatement(query);
+				      preparedStmt.setInt  (1, RoomNo);
+				      preparedStmt.setInt  (2, hotelid);
+				      preparedStmt.executeUpdate();
+				     
+					}
+					
+					else if(roomtype.equals("e"))
+					
+					{ String query = "UPDATE `hotelreservation`.`hotel` SET `vroome` = ? WHERE (`hid` = ?);";
+				      PreparedStatement preparedStmt = getConnectionDB().prepareStatement(query);
+				      preparedStmt.setInt  (1, RoomNo);
+				      preparedStmt.setInt  (2, hotelid);
+				      preparedStmt.executeUpdate();
+				     
+					}
+					
+					else if(roomtype.equals("p"))
+					
+					{ String query = "UPDATE `hotelreservation`.`hotel` SET `vroomp` = ? WHERE (`hid` = ?);";
+				      PreparedStatement preparedStmt = getConnectionDB().prepareStatement(query);
+				      preparedStmt.setInt  (1, RoomNo);
+				      preparedStmt.setInt  (2, hotelid);
+				      preparedStmt.executeUpdate();
+				    
+					}
+					
+					
+					getConnectionDB().close();}catch(Exception e) {}
+		
+}
+	
 	
 	
 	public void reload() throws IOException {

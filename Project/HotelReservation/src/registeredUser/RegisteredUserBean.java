@@ -20,16 +20,16 @@ public class RegisteredUserBean {
 	public RegisteredUserBean() {
 		try {
 			
-			 PreparedStatement preStatement = getConnectionDB().prepareStatement(" SELECT r.namee, r.lastname, u.email, r.pnumber,r.bdate,r.gender,r.balance\r\n" + 
+			 PreparedStatement preStatement = getConnectionDB().prepareStatement(" SELECT r.namee, r.lastname, u.email, r.pnumber,r.bdate,r.gender\r\n" + 
 		        		"	        FROM registereduser r, users u\r\n" +
-		      		"	            WHERE u.email=? AND u.userid = r.rid ");
+		      		    "	        WHERE u.email=? AND u.userid = r.rid ");
  
           preStatement.setString(1, User.email); 
           ResultSet rs = preStatement.executeQuery();
 		    
 		    
 		    while(rs.next()){
-		    	regUser.add(new RegisteredUser(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5), rs.getString(6),rs.getDouble(7)));
+		    	regUser.add(new RegisteredUser(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5), rs.getString(6)));
 	        }
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -42,22 +42,7 @@ public class RegisteredUserBean {
 	
 public void SendDeleteRequest() {
 		
-		try {	
-	    
-	    /*//elimizdeki mail ile user id yi buluyoruz
-		 PreparedStatement preStatement = getConnectionDB().prepareStatement(" SELECT r.rid \r\n" + 
-	        		"	            FROM registereduser r, users u\r\n" +
-	      		"	            WHERE u.email=? AND u.userid = r.rid ");
-
-       preStatement.setString(1, User.email); //buraya login olmuþ kullanýcýnýn emaili gelecek
-
-       ResultSet rs = preStatement.executeQuery();
-	    int UserId=-1;
-	    
-	    while(rs.next()){
-	    	UserId= rs.getInt(1);
-       }*/
-	    
+		try {
 	     
 	      String query = "UPDATE `hotelreservation`.`registereduser` SET `issendrequest` = '1' WHERE (`rid` = ?);";
 	      PreparedStatement preparedStmt = getConnectionDB().prepareStatement(query);
@@ -68,7 +53,7 @@ public void SendDeleteRequest() {
 	    
 		
 	      
-		}catch(Exception  ex) {}
+		}catch(Exception  ex) {System.out.println("SendDeleteRequest() de hata");}
 	
 		
 	}

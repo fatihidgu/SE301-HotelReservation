@@ -83,6 +83,8 @@ private List<comment> comments = new ArrayList<>();
 	      PreparedStatement preparedStmt = getConnectionDB().prepareStatement(query);
 	      preparedStmt.setInt   (1, id);
 	      preparedStmt.executeUpdate();
+			
+			
 	      
 		//typený getir
 		      PreparedStatement regUsers = getConnectionDB().prepareStatement(" SELECT u.typee  FROM users u\r\n" +
@@ -92,11 +94,81 @@ private List<comment> comments = new ArrayList<>();
      // hangi useri sildiðini bul hotel owner mu registered user mý
         while(rs.next()){
         	if(rs.getString(1).equals("r")) {
+        		//registered userin current reservasyonlarýný yaptýðý hoteller idsi
+        		
+PreparedStatement hot = getConnectionDB().prepareStatement(" SELECT r.hotelid,r.numberofroom,r.roomtype FROM reservation r\r\n" + 
+		"where r.iscancelld=0 and r.enddate >= '2015-12-12' and r.userid=? ");
+hot.setInt(1, id);
+ResultSet hot1 = hot.executeQuery();
+while(hot1.next()) {
+	System.out.println("kardþeim þuraya gelir misin");
+System.out.println("hotel id"+hot1.getString(1));//hotel id
+System.out.println("oda sayýsý"+hot1.getString(2));//oda sayýsý
+System.out.println("oda tipi "+hot1.getString(3));// oda tipi
+
+//tüm rezervasyon odalarýný boþalt
+if(hot1.getString(3).equals("s")) {
+	System.out.println("oldu lan oldu olduuu");
+	PreparedStatement hot2 = getConnectionDB().prepareStatement(" SELECT vrooms FROM hotelreservation.hotel\r\n" + 
+			"where hid=?");
+	hot2.setInt(1, hot1.getInt(1));
+	ResultSet hot3 = hot2.executeQuery();
+	int bosoda=0;
+	while(hot3.next()) {
+		bosoda=hot3.getInt(1);
+	}
+	bosoda=bosoda+hot1.getInt(2);
+PreparedStatement clearroom = getConnectionDB().prepareStatement("UPDATE hotelreservation.hotel SET vrooms = ?  WHERE (hid = ?)");
+clearroom.setInt   (1,bosoda);
+clearroom.setString(2, hot1.getString(1));
+clearroom.executeUpdate();
+}
+
+if(hot1.getString(3).equals("e")) {
+	PreparedStatement hot2 = getConnectionDB().prepareStatement(" SELECT vroome FROM hotelreservation.hotel\r\n" + 
+			"where hid=?");
+	hot2.setInt(1, hot1.getInt(1));
+	ResultSet hot3 = hot2.executeQuery();
+	int bosoda=0;
+	while(hot3.next()) {
+		bosoda=hot3.getInt(1);
+	}
+	bosoda=bosoda+hot1.getInt(2);
+	System.out.println("oldu lan oldu olduuu2");
+PreparedStatement clearroom = getConnectionDB().prepareStatement("UPDATE hotelreservation.hotel SET vroome = ?  WHERE (hid = ?)");
+clearroom.setInt   (1,bosoda);
+clearroom.setString(2, hot1.getString(1));
+clearroom.executeUpdate();
+}
+
+if(hot1.getString(3).equals("p")) {
+	PreparedStatement hot2 = getConnectionDB().prepareStatement(" SELECT vroomp FROM hotelreservation.hotel\r\n" + 
+			"where hid=?");
+	hot2.setInt(1, hot1.getInt(1));
+	ResultSet hot3 = hot2.executeQuery();
+	int bosoda=0;
+	while(hot3.next()) {
+		bosoda=hot3.getInt(1);
+	}
+	bosoda=bosoda+hot1.getInt(2);
+	System.out.println("oldu lan oldu olduuu1");
+PreparedStatement clearroom = getConnectionDB().prepareStatement("UPDATE hotelreservation.hotel SET vroomp = ?  WHERE (hid = ?)");
+clearroom.setInt   (1,bosoda);
+clearroom.setString(2, hot1.getString(1));
+clearroom.executeUpdate();
+}
+
+
+}
+        		
+        		
         		//registered userin tüm rezervasyonlarýný iptal et
         		 PreparedStatement res = getConnectionDB().prepareStatement("UPDATE hotelreservation.reservation SET iscancelld = 1 WHERE userid = ?\r\n" + 
         		 		"");
  	      res.setInt(1, id);
           res.executeUpdate();
+          
+          
         		
             }
            else  {

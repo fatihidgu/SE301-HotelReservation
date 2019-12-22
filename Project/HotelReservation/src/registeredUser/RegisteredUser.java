@@ -15,10 +15,11 @@ public class RegisteredUser {
 	private String isSendRequest;
 	private int balance;
 	
-	private int oldid; //admin
+	
 	
 	//yeni oluþturmak için
 	 public RegisteredUser(int id,String name, String lastName, String email, int pnumber, Date birthDate, String gender,int balance) {
+		this.id=id;
 		this.name = name;
 		this.lastName = lastName;
 		this.email = email;
@@ -45,7 +46,7 @@ public class RegisteredUser {
 		this.name = name;
 		this.lastName = lastName;
 		this.email = email;
-		this.oldid = id;
+		this.id = id;
 	}
 	
 	public RegisteredUser() {}
@@ -74,9 +75,6 @@ public class RegisteredUser {
 		return gender;
 	}
 	
-	public int getOldid() {
-		return oldid;
-	}
 
 	public int getBalance() {
 		return balance;

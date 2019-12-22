@@ -299,7 +299,7 @@ public class MakeReservationBean  {
 		}  
 	
 		public void roomTypeNo() {
-			  System.out.println("hotel idyi getirdim brooo"+this.hotelid);
+		
 				roommap  = new HashMap<>();  
 				
 				

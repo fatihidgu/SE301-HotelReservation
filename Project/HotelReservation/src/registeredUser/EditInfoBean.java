@@ -113,9 +113,5 @@ import user.User;
 	}
 
 	
-
-	
-	public EditInfoBean() {
-	}
 	
 }

@@ -19,7 +19,7 @@ private	String roomtype;
 private String hotelname;
 private int cost;
 	
-private int oldId;
+
 
     public Reservation() {}
 	//normal reservation oluþtururken
@@ -43,7 +43,7 @@ private int oldId;
 		this.enddate =enddate ;
 		this.numberofroom =numberofroom ;
 		this.roomtype=roomtype;
-		this.oldId=id;
+		this.id=id;
 		this.cost = cost;
 	}
 	
@@ -54,10 +54,6 @@ private int oldId;
 	
 	public void setId(int id) {
 		this.hotelid = id;
-	}
-	
-	public int getOldId() {
-		return oldId;
 	}
 	
 	public int getUserid() {

@@ -2,6 +2,7 @@ package admin;
 
 import java.util.List;
 
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -94,11 +95,14 @@ private List<comment> comments = new ArrayList<>();
      // hangi useri sildiðini bul hotel owner mu registered user mý
         while(rs.next()){
         	if(rs.getString(1).equals("r")) {
+        		 Date d = new Date();
+        		    String Today = d.getYear()+1900+"."+(d.getMonth()+1)+"."+d.getDate();
         		//registered userin current reservasyonlarýný yaptýðý hoteller idsi
         		
 PreparedStatement hot = getConnectionDB().prepareStatement(" SELECT r.hotelid,r.numberofroom,r.roomtype FROM reservation r\r\n" + 
-		"where r.iscancelld=0 and r.enddate >= '2015-12-12' and r.userid=? ");
-hot.setInt(1, id);
+		"where r.iscancelld=0 and r.enddate >= ? and r.userid=? ");
+hot.setString(1, Today);
+hot.setInt(2, id);
 ResultSet hot1 = hot.executeQuery();
 while(hot1.next()) {
 	System.out.println("kardþeim þuraya gelir misin");
@@ -171,7 +175,7 @@ clearroom.executeUpdate();
           
         		
             }
-           else  {
+           else if(rs.getString(1).equals("h"))   {
         	   Date d = new Date();
    		    String Today = d.getYear()+1900+"."+(d.getMonth()+1)+"."+d.getDate();
    		   

@@ -25,7 +25,9 @@ public class RegistrationBean {
 	private int pnumber;
 	private Date birthDate;
 	private String gender;
-	private String typee="r";
+	private String typee;
+
+	
 
 	public String getTypee() {
 		return typee;
@@ -48,9 +50,16 @@ public class RegistrationBean {
 	public List<User> getUser() {
 		return User;
 	}
+	public void insertR() {
+		this.setTypee("r");
+		this.insertUser();
+	}
+	public void insertHO() {
+		this.setTypee("h");
+		this.insertUser();
+	}
 
 	public void setValues() {
-		this.setTypee(typee);
 		// this.setUsername(username);
 		this.setPassword(password);
 		try {
@@ -119,11 +128,12 @@ public class RegistrationBean {
 				
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 				System.out.println(e.toString());
-			}}else if(typee=="h") {
+			}
+			}else if(typee=="h") {
 				try {
 					String bday = birthDate.getYear() + 1900 + "." + (birthDate.getMonth() + 1) + "." + birthDate.getDate();
 
-					String query4 = "INSERT INTO hotelreservation.hotelowner(hoid,namee,lastname,pnumber,gender,bdate,issendrequest) VALUES (?,?,?,?,?,?,?,?)";
+					String query4 = "INSERT INTO hotelreservation.hotelowner(hoid,namee,lastname,pnumber,gender,bdate,issendrequest) VALUES (?,?,?,?,?,?,?)";
 					PreparedStatement preparedStmt4 = getConnectionDB().prepareStatement(query4);
 					preparedStmt4.setInt(1, userid);
 					preparedStmt4.setString(2, name);

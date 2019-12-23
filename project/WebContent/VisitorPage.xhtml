@@ -136,10 +136,8 @@
 						<br />
 						<h:commandButton value="Make Reservation"
 							style="float: right; height: auto;font-size:26px;margin-top: 2%; margin-right: 8%"
-							actionListener="#{MakeResBean.takeHotelinfoDate(hoHotels.id,hoHotels.name,DenemeBean.startdate,DenemeBean.enddate)}"
+							actionListener="#{MakeResBean.takeHotelinfo(hoHotels.oldid,hoHotels.name)}"
 							action="makeReservation.xhtml" />
-
-
 					</p:column>
 				</p:dataTable>
 			</h:panelGrid>

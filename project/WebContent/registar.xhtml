@@ -27,23 +27,17 @@
 				type="submit" action="#{user.goLoginPage}" />
 		</div>
 	</h:form>
+	<div
+		style="border: 1px black solid; background-color: #DDD; padding: 8px; padding-bottom: 50px; margin-top: 15px;">
+		<h1>REGISTER AS...</h1>
+		<a href="RegistrationR.xhtml"
+			style="padding: 50px; color: black; display: block; border: 1px black solid; font-size: 36px; font-weight: bold; margin-left: 35%; padding-left: 5%; margin-right: 30%; padding-right: 5%; margin-top: 50px; background-color: grey;">User</a>
+		<a href="RegistrationR.xhtml"
+			style="padding: 50px; color: black; display: block; border: 1px black solid; font-size: 36px; font-weight: bold; margin-left: 35%; padding-left: 5%; margin-right: 30%; padding-right: 5%; margin-top: 50px; background-color: grey;">Hotel
+			Owner</a>
+	</div>
 </h:body>
 
-
-
-<h:form id="enterInformation"
-	style="margin-top: 2%; border: 1px solid black; width: 100%; height: 600px">
-	<h:commandButton action="#{RegistrationBean.setTypee())}">
-	<f:param name="action" value="r" />
-</h:commandButton>
-<hr/>
-<h:commandButton style="backgroun-color:pink" action="#{RegistrationBean.setTypee()}">
-	<f:param name="action" value="h" />
-</h:commandButton>
-
-
-
-</h:form>
 
 
 </html>

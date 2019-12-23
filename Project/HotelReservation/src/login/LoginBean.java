@@ -38,7 +38,6 @@ public class LoginBean {
 	public void setValues() {
 		this.setUsername(username);
 		this.setPassword(password);
-		System.out.println(username+" "+password);
 		try {
 			
 			 PreparedStatement preStatement = getConnectionDB().prepareStatement(" SELECT u.userid, u.email, u.passw,u.typee,u.isdeleted\r\n" + 
@@ -57,15 +56,14 @@ public class LoginBean {
 	}
 	public String userPage() {
 		String typee=User.get(0).getTypee();
-		System.out.println(typee+"hello");
 		if(typee.equals("r")) {
 			return "registerUser.xhtml";
 		}else if(typee.equals("h")){
 			return "hotelOwnerMainPage.xhtml";
 		}else if(typee=="a"){
-			return "registerUser.xhtml";
+			return "admin.xhtml";
 		}else {
-			return "editUserInfo.xhtml";
+			return "VisitorPage.xhtml";
 		}
 
 	}

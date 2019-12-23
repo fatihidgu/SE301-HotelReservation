@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>USERMAINPAGE</title>
+</h:head>
+<h:body>
+<h:form id="header" style="margin-top: 2%; border: 1px solid black; height: 120px; width: 100%; background-color: #8FBC8F">
+<div style="float: left; margin-top: 0.8%; margin-left: 1%">
+<h:commandLink id="ho-logo-id" action="registerUser.xhtml">
+<h:graphicImage url="logo.png" style="width: 100px; height: 100px;"></h:graphicImage>
+</h:commandLink>
+</div>
+<div style="margin-left: 82%; margin-top: 3.5%">
+<h:commandLink id="ho-name-id" action="registerUser.xhtml" >
+<h:outputText value="MY ACCOUNT"></h:outputText>
+</h:commandLink>
+<h:commandButton value="LOGOUT" style="margin-left:3%; height: 25px" type="submit" action="#{user.goLoginPage}" />
+</div>
+</h:form>
+
+<h:form id="menu" style="margin-top: 2%; border: 1px solid black; width: 100%">
+    <p:growl id="msgs" showDetail="true" />
+    <p:tabView orientation="left" style="height: auto">
+    
+    
+        <p:tab title="Account Information">
+        	<h:commandButton value="edit" style="margin-left:3%; height: 25px"  action="editUserInfo.xhtml" />
+            <h:panelGrid columns="2" cellpadding="10">
+            <p:dataTable var="regUser" value="#{RegUserBean.regUser}" >
+            	<p:column headerText="Name">
+            		<h:outputText value="#{regUser.name}" />
+    			</p:column>
+    			<p:column headerText="Lastname">
+        			<h:outputText value="#{regUser.lastName}" />
+    			</p:column>
+    			<p:column headerText="Email">
+        			<h:outputText value="#{regUser.email}" />
+    			</p:column>
+    			<p:column headerText="Phone Number      ">
+        			<h:outputText value="#{regUser.pnumber}" />
+    			</p:column>
+    			<p:column headerText="Birth Date">
+        			<h:outputText value="#{regUser.birthDate}" />
+    			</p:column>
+    			<p:column headerText="Gender">
+        			<h:outputText value="#{regUser.gender}" />
+    			</p:column>
+    		
+			</p:dataTable>
+            </h:panelGrid>
+                			   
+    			  
+<p:growl id="message" showDetail="true" />  
+<p:commandButton value="Delete my account" actionListener="#{RegUserBean.SendDeleteRequest()}" update="message">  
+<p:confirm header="Confirmation" message="Are you sure you want to send a request to admin to delete your account?" icon="ui-icon-alert" />  
+</p:commandButton>  
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  
+<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+</p:confirmDialog>  
+
+       
+        </p:tab>
+        
+        <p:tab title="Reservations">
+            <h:panelGrid columns="2" cellpadding="10">
+           <h:panelGroup  id="tablo">
+            	<p:dataTable var="reservationss" value="#{reservationssBean.reservationss}">
+    			<p:column headerText="Hotel name">
+        			<h:outputText value="#{reservationss.hotelname}" />
+    			</p:column>
+    			<p:column headerText="Start date">
+        			<h:outputText value="#{reservationss.startdate}" />
+    			</p:column>
+    			<p:column headerText="End date">
+        			<h:outputText value="#{reservationss.enddate}" />
+    			</p:column>
+    			<p:column headerText="Number of rooms">
+        			<h:outputText value="#{reservationss.numberofroom}" />
+    			</p:column>
+    			<p:column headerText="Room type">
+        			<h:outputText value="#{reservationss.roomtype}" />
+    			</p:column>
+    				<p:column headerText="Cost">
+        			<h:outputText value="#{reservationss.cost}" />
+    			</p:column>
+    			   	<p:column>
+    			  
+<p:growl id="message" showDetail="true" />  
+<p:commandButton value="Cancel" actionListener="#{reservationssBean.delete(reservationss.oldId , reservationss.cost)}" update="message"  action="#{reservationssBean.reload()}">  
+<p:confirm header="Confirmation" message="Are you sure you want to cancel this Reservation?" icon="ui-icon-alert" />  
+</p:commandButton>  
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  
+<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+</p:confirmDialog>  
+
+        		</p:column>
+				</p:dataTable>
+				   </h:panelGroup>
+            </h:panelGrid>
+            </p:tab>
+        
+        
+        <p:tab title="Past Reservations">
+            <h:panelGrid columns="2" cellpadding="10">
+            	<p:dataTable var="pastreservationss" value="#{pastreservationssBean.pastreservationss}">
+    			<p:column headerText="Hotel name">
+        			<h:outputText value="#{pastreservationss.hotelname}" />
+    			</p:column>
+    			<p:column headerText="Start date">
+        			<h:outputText value="#{pastreservationss.startdate}" />
+    			</p:column>
+    			<p:column headerText="End date">
+        			<h:outputText value="#{pastreservationss.enddate}" />
+    			</p:column>
+    			<p:column headerText="Number of rooms">
+        			<h:outputText value="#{pastreservationss.numberofroom}" />
+    			</p:column>
+    			<p:column headerText="Room type">
+        			<h:outputText value="#{pastreservationss.roomtype}" />
+    			</p:column>
+    			<p:column headerText="Cost">
+        			<h:outputText value="#{pastreservationss.cost}" />
+    			</p:column>
+				</p:dataTable>
+            </h:panelGrid>
+             </p:tab>
+        
+       
+        
+    </p:tabView>
+</h:form>
+</h:body>
+</html>

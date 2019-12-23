@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Edit my info</title>
+	<style>
+.noheader.ui-datatable table thead {
+	display: none;
+}
+</style>
+
+</h:head>
+
+<h:body>
+	<h:form id="header"
+		style="margin-top: 2%; border: 1px solid black; height: 120px; width: 100%; background-color: #8FBC8F">
+		<div style="float: left; margin-top: 0.8%; margin-left: 1%">
+			<h:commandLink id="ho-logo-id" action="registerUser.xhtml">
+				<h:graphicImage url="WebContent\resources\images\logo.png"
+					style="width: 100px; height: 100px;"></h:graphicImage>
+			</h:commandLink>
+		</div>
+		<div style="margin-left: 82%; margin-top: 3.5%">
+			<h:commandLink id="ho-name-id" action="registerUser.xhtml">
+				<h:outputText value="MY ACCOUNT"></h:outputText>
+			</h:commandLink>
+
+			<h:commandButton value="LOGIN" style="margin-left:3%; height: 25px"
+				type="submit" action="login.xhtml" />
+		</div>
+	</h:form>
+</h:body>
+
+<h:body
+	style="width: 90%;padding-right:5%;padding-left:5%;margin-top:30px;">
+
+	<h:body style="width: 100%;">
+		<h:form id="hotelName"
+			style="margin-top: 8px; border: 1px solid black;padding-top:25px;
+		padding-bottom:25px; width: 100%;float:left; background-color: #8FBC8F">
+
+			<div style="width: 30%; float: left;">
+				<p:inputText id="hotelname" style="font-size:22px;"
+					placeholder="Hotel Name" value="#{LoginBean.username}"
+					required="true" />
+			</div>
+			<div style="float: left; width: 60%;">
+				<h:outputText value="Beginning Date "
+					style="float:left;font-size: 22pt"></h:outputText>
+
+				<div style="width: 40%; float: left;">
+					<p:calendar id="startDate" value="#{MakeResBean.startdate}"
+						pattern="yyyy-MM-dd" mindate="today"
+						maxdate="#{MakeResBean.enddate}">
+						<p:ajax event="dateSelect" update="endDate" />
+					</p:calendar>
+				</div>
+				<div>
+					<h:outputText value="Ending Date "
+						style="float:left;font-size: 22pt"></h:outputText>
+				</div>
+				<div style="float: left;">
+					<p:calendar id="endDate" value="#{MakeResBean.enddate}"
+						pattern="yyyy-MM-dd" mindate="#{MakeResBean.startdate}">
+						<p:ajax event="dateSelect" update="startDate" />
+					</p:calendar>
+				</div>
+				<br />
+			</div>
+			<h:commandButton value="Search"
+				style="border:1px solid black;float:right;margin-right:5%;font-size:28px;"
+				type="submit" actionListener="#{LoginBean.setValues()}"
+				action="#{LoginBean.userPage()}" />
+
+		</h:form>
+	</h:body>
+	<h:body style="float:left;width: 100%;margin-top:30px;;">
+		<h:form
+			style="clear:both;float:left;width:25%;padding:5px;margin-top:30px;background-color:#DDD;">
+			<div style="clear: both">
+				<h3 style="margin-bottom: 0px; font-size: 32px;">Quality</h3>
+				<p:selectManyCheckbox id="basic"
+					style="clear:both;font-size:22px;margin-top:-30px;"
+					value="#{checkboxView.selectedConsoles}">
+					<f:selectItem itemLabel="5 Star" itemValue="5" />
+					<br />
+					<f:selectItem itemLabel="4 Star" itemValue="4" />
+					<br />
+					<f:selectItem itemLabel="3 Star" itemValue="3" />
+					<br />
+					<f:selectItem itemLabel="2 Star" itemValue="2" />
+					<br />
+					<f:selectItem itemLabel="1 Star" itemValue="1" />
+
+				</p:selectManyCheckbox>
+			</div>
+			<hr />
+			<div style="clear: both">
+				<h3 style="margin-bottom: 0px; font-size: 32px;">Location</h3>
+
+
+				<p:selectManyCheckbox id="ba" style="clear:both;font-size:22px;"
+					value="#{checkboxView.selectedCo}">
+					<f:selectItem itemLabel="Istanbul" itemValue="istanbul" />
+					<br />
+					<f:selectItem itemLabel="Hatay" itemValue="hatay" />
+
+				</p:selectManyCheckbox>
+			</div>
+
+			<h:commandButton value="Filter"
+				style=" height: auto;font-size:24px;margin-top: 2%; margin-right: 8%"
+				actionListener="#{MakeResBean.take}" action="makeReservation.xhtml" />
+
+
+		</h:form>
+		<h:form
+			style="width:70%;padding:5px;margin-top:30px;float:right;min-height:35px;background-color:green;">
+			
+
+			<h:panelGrid style="clear:both;width:80%;margin:5%;" columns="2"
+				cellpadding="10">
+				<p:dataTable style="width:100%" var="hoHotels"
+					value="#{VisitorPageBean.hoHotels}" styleClass="noheader">
+					<p:column style="padding:15px;min-height:150px;">
+
+						<h:outputText style="font-size:32px;font-weight:bold"
+							value="#{hoHotels.name}" />
+						<br />
+						<h:outputText value="in #{hoHotels.location}" />
+						<br />
+						<h:commandButton value="Make Reservation"
+							style="float: right; height: auto;font-size:26px;margin-top: 2%; margin-right: 8%"
+							actionListener="#{MakeResBean.takeHotelinfoDate(hoHotels.id,hoHotels.name,DenemeBean.startdate,DenemeBean.enddate)}"
+							action="makeReservation.xhtml" />
+
+
+					</p:column>
+				</p:dataTable>
+			</h:panelGrid>
+
+
+		</h:form>
+
+	</h:body>
+
+</h:body>
+
+
+</html>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 
+    <h:body>
+            <p:tab title="My Hotels">
+            <h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Name " />
+        			<h:outputText value="#{commentBean.hotelname}" />
+        			<br/>
+        			<h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Location " />
+        			<h:outputText value="#{commentBean.location}" />
+        			<br/>
+        			<h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Quality " />
+        			<h:outputText value="#{commentBean.quality}" />
+        			<br/><br/>
+        			<h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Cost for standart room " />
+        			<h:outputText value="#{commentBean.costs}" />
+        			<br/>
+        			<h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Vacant room for standart room " />
+        			<h:outputText value="#{commentBean.vrooms}" />
+        			<br/><br/>
+        			<h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Cost for executive room " />
+        			<h:outputText value="#{commentBean.coste}" />
+        			<br/>
+        			<h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Vacant room for executive	 room  " />
+        			<h:outputText value="#{commentBean.vroome}" />
+        			<br/><br/>
+        			<h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Cost for presidential room  " />
+        			<h:outputText value="#{commentBean.costp}" />
+        			<br/>
+        				<h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Vacant room for presidential room  " />
+        			<h:outputText value="#{commentBean.vroomp}" />
+    			
+            <h:panelGrid columns="2" cellpadding="10">
+            		<p:dataTable var="commentt" value="#{commentBean.commentt}">
+    			
+    			<p:column style="font-size:85%; text-align:center;" headerText="Comments">
+        			<br/><h:outputText value="#{commentt.text}" /><br/>
+    			</p:column>			
+			</p:dataTable>
+            </h:panelGrid>
+        </p:tab>
+    
+	  <h:form>
+		<table>
+    		<tr>
+    		  <td valign="top">Write your Comment :</td>
+    		  <td><h:inputTextarea value="#{commentBean.text}" cols="50" rows="15" update="Refresh" /></td>
+    		</tr> 
+    		</table>
+    		<h:commandButton value="Submit" actionListener="#{commentBean.writecomment}" action="commentmain.xhtml" />
+    	  </h:form>
+ 
+</h:body>
+</html>

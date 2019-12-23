@@ -32,7 +32,7 @@ public class PastReservationBean {
 	preStatement.setString(1,User.email);
 	preStatement.setString(2, Today);
 	ResultSet rs = preStatement.executeQuery();
-		    
+		   
 		     while(rs.next()){ 
 		
 		    	 pastreservationss.add(new Reservation(rs.getString(1), rs.getDate(2), rs.getDate(3), rs.getInt(4), rs.getString(5),rs.getInt(6),rs.getInt(7)));

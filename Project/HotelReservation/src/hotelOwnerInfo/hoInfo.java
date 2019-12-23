@@ -2,10 +2,6 @@ package hotelOwnerInfo;
 
 import java.util.Date;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-
-
 public class hoInfo {
 	private String name;
 	private String lastName;
@@ -56,5 +52,26 @@ public class hoInfo {
 	}
 	public int getOldid() {
 		return oldid;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public void setPnumber(int pnumber) {
+		this.pnumber = pnumber;
+	}
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public void setOldid(int oldid) {
+		this.oldid = oldid;
 	}
 }

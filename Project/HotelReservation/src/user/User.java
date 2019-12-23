@@ -1,7 +1,7 @@
 package user;
 
 public class User {
-	public static int userid;//3
+	public static int userid = 1;//3
 	public static String email;//furki@gmail.com
 	public static String typee;//r
 	

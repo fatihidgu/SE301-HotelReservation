@@ -28,7 +28,19 @@
     <p:growl id="msgs" showDetail="true" />
     <p:tabView orientation="left" style="height: auto">
         <p:tab title="Account Information">
-            <h:panelGrid columns="2" cellpadding="10">
+        
+        	<div style="float:right;">
+        	<p:growl id="message" showDetail="true" />  
+			<p:commandButton value="DELETE MY ACCOUNT" actionListener="#{hoInfoBean.SendDeleteRequest()}" update="message">  
+				<p:confirm header="Confirmation" message="Are you sure you want to send a request to admin to delete your account?" icon="ui-icon-alert" />  
+			</p:commandButton>  
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  
+				<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+				<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+			</p:confirmDialog>
+        	</div>
+        	
+            <h:panelGrid style = "margin-top:7%" columns="2" cellpadding="10">
             <p:dataTable var="hoInfo" value="#{hoInfoBean.hoInfo}">
             	<p:column headerText="Name">
             		<h:outputText value="#{hoInfo.name}" />
@@ -36,7 +48,7 @@
     			<p:column headerText="Lastname">
         			<h:outputText value="#{hoInfo.lastName}" />
     			</p:column>
-    			<p:column headerText="Email">
+    			<p:column style = "width:25%" headerText="Email">
         			<h:outputText value="#{hoInfo.email}" />
     			</p:column>
     			<p:column headerText="Phone Number">
@@ -50,41 +62,45 @@
     			</p:column>
 			</p:dataTable>
             </h:panelGrid>
+            <div style="float:right; margin-top:5%;">
+            <h:commandButton value="EDIT" style="margin-left:3%; height: 25px"  action="editHoInfo.xhtml" />
+            </div>
         </p:tab>
+        
         <p:tab title="My Hotels">
             <h:panelGrid columns="2" cellpadding="10">
             	<p:dataTable var="hoHotels" value="#{hoHotelsBean.hoHotels}">
-    			<p:column headerText="Name">
+    			<p:column style="font-size:85%; text-align:center;" headerText="Name">
         			<h:outputText value="#{hoHotels.name}" />
     			</p:column>
-    			<p:column headerText="Location">
+    			<p:column style="font-size:85%; text-align:center;" headerText="Location">
         			<h:outputText value="#{hoHotels.location}" />
     			</p:column>
-    			<p:column headerText="Quality">
+    			<p:column style="font-size:85%; text-align:center;" headerText="Quality">
         			<h:outputText value="#{hoHotels.quality}" />
     			</p:column>
-    			<p:column headerText="Cost for Standarts">
+    			<p:column style="font-size:85%; text-align:center;" headerText="Cost for Standart">
         			<h:outputText value="#{hoHotels.costs}" />
     			</p:column>
-    			<p:column headerText="Vacant Rooms for Standarts">
+    			<p:column style="font-size:85%; text-align:center;" headerText="Vacant Rooms for Standart">
         			<h:outputText value="#{hoHotels.vrooms}" />
     			</p:column>
-    			<p:column headerText="Cost for Executives">
+    			<p:column style="font-size:85%; text-align:center;" headerText="Cost for Executive">
         			<h:outputText value="#{hoHotels.coste}" />
     			</p:column>
-    			<p:column headerText="Vacant Rooms for Executives">
+    			<p:column style="font-size:85%; text-align:center;" headerText="Vacant Rooms for Executive">
         			<h:outputText value="#{hoHotels.vroome}" />
     			</p:column>
-    			<p:column headerText="Cost for Presidentials">
+    			<p:column style="font-size:85%; text-align:center;" headerText="Cost for Presidential">
         			<h:outputText value="#{hoHotels.costp}" />
     			</p:column>
-    			<p:column headerText="Vacant Rooms for Presidentials">
+    			<p:column style="font-size:85%; text-align:center;" headerText="Vacant Rooms for Presidential">
         			<h:outputText value="#{hoHotels.vroomp}" />
     			</p:column>    			
-    			<p:column>
-        			<h:commandButton value="EDIT" style="margin-left:3%; height: 25px" type="submit" action="#{user.goLoginPage}" />
-        			<h:commandButton value="ACTIVATE" style="margin-left:3%; height: 25px" type="submit" action="#{user.goLoginPage}" />
-        			<h:commandButton value="DEACTIVATE" style="margin-left:3%; height: 25px" type="submit" action="#{user.goLoginPage}" />
+    			<p:column style="width:18%; text-align:center;">
+        			<h:commandButton value="EDIT" style="margin-left:3%; height: 23px" type="submit" actionListener="#{hoHotelsEditBean.takeHotelId(hoHotels.id)}" action="editHoHotel.xhtml" />
+        			<h:commandButton value="ACTIVATE" style="margin-left:3%; height: 23px" type="submit" actionListener="#{hoHotelsBean.ActiveHotel(hoHotels.id)}" />
+        			<h:commandButton value="DEACTIVATE" style="margin-left:3%; height: 23px" type="submit" actionListener="#{hoHotelsBean.DeactiveHotel(hoHotels.id)}" />
     			</p:column>
 				</p:dataTable>
             </h:panelGrid>
@@ -94,10 +110,3 @@
 </h:form>
 </h:body>
 </html>
-
-<!-- 
-LOGOUT butonu
-SAVE butonu
-ACCOUNT INFORMATION görüntüsü düzeltilecek
-MY HOTELS görüntüsü düzeltilecek
- -->

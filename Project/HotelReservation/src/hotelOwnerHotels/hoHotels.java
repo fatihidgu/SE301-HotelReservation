@@ -1,9 +1,7 @@
 package hotelOwnerHotels;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-
 public class hoHotels {
+	private int id;
 	private String name;
 	private String location;
 	private int quality;
@@ -18,7 +16,8 @@ public class hoHotels {
 	private int oldid;
 	private String hemail;
 	
-	public hoHotels(String name, String location, int quality, int costs, int vrooms, int coste, int vroome, int costp, int vroomp, char isactive, char isaccepted) {
+	public hoHotels(int id, String name, String location, int quality, int costs, int vrooms, int coste, int vroome, int costp, int vroomp, char isactive, char isaccepted) {
+		this.id = id;
 		this.name = name;
 		this.location = location;
 		this.quality = quality;
@@ -86,6 +85,39 @@ public class hoHotels {
 	public int getOldid() {
 		return oldid;
 	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public void setQuality(int quality) {
+		this.quality = quality;
+	}
+	public void setCosts(int costs) {
+		this.costs = costs;
+	}
+	public void setVrooms(int vrooms) {
+		this.vrooms = vrooms;
+	}
+	public void setCoste(int coste) {
+		this.coste = coste;
+	}
+	public void setVroome(int vroome) {
+		this.vroome = vroome;
+	}
+	public void setCostp(int costp) {
+		this.costp = costp;
+	}
+	public void setVroomp(int vroomp) {
+		this.vroomp = vroomp;
+	}
+	public void setIsactive(char isactive) {
+		this.isactive = isactive;
+	}
+	public void setIsaccepted(char isaccepted) {
+		this.isaccepted = isaccepted;
+	}
 	public void setOldid(int oldid) {
 		this.oldid = oldid;
 	}
@@ -95,6 +127,10 @@ public class hoHotels {
 	public void setHemail(String hemail) {
 		this.hemail = hemail;
 	}
-
-
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 }

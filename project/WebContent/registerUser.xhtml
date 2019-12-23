@@ -93,7 +93,7 @@
     			   	<p:column>
     			  
 <p:growl id="message" showDetail="true" />  
-<p:commandButton value="Cancel" actionListener="#{reservationssBean.delete(reservationss.oldId , reservationss.cost)}" update="message"  action="#{reservationssBean.reload()}">  
+<p:commandButton value="Cancel" actionListener="#{reservationssBean.delete(reservationss.id , reservationss.cost)}" update="message"  action="#{reservationssBean.reload()}">  
 <p:confirm header="Confirmation" message="Are you sure you want to cancel this Reservation?" icon="ui-icon-alert" />  
 </p:commandButton>  
 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  

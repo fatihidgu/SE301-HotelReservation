@@ -10,11 +10,15 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import hotelOwnerHotels.hoHotels;
+import user.User;
 
 @ManagedBean (name="VisitorPageBean")
 @SessionScoped
 public class VisitorPageBean {
 	private List<hoHotels> hoHotels = new ArrayList<>();
+	private String hotelName="";
+	private List<Integer> quality=new ArrayList<>();
+	private List<String> location=new ArrayList<>();
 	
 	
 	public List<hoHotels> getHoHotels() {
@@ -23,14 +27,82 @@ public class VisitorPageBean {
 	public void setHoHotels(List<hoHotels> hoHotels) {
 		this.hoHotels = hoHotels;
 	}
+	public void filter() {
+		System.out.println("hello");
+		this.getQuality().clear();
+		this.getLocation().clear();
+		this.getHoHotels().clear();
+		this.setQuality(quality);
+		this.setLocation(location);
+		String first = " ";
+		String second= " ";
+		System.out.print("kalitesi:"+quality.size());
+
+		for( int i = 0 ; i < this.getQuality().size(); i++ ) {
+		    first=first+("?,");
+		    System.out.println(this.getQuality().get(i));
+		 
+		}
+		first=first.substring(0, first.length()-2);
+		for( int i = 0 ; i < this.getLocation().size(); i++ ) {
+		    second=second+("?,");
+		    System.out.println(this.getLocation().get(i));
+		}
+		second=second.substring(0, first.length()-2);
+		String and="";
+		if(!this.getQuality().isEmpty()) {
+			
+		}
+		if(!this.getQuality().isEmpty()||!this.getLocation().isEmpty()) {
+			and=" and ";
+		}
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/hotelreservation", "root", "");
+		    String query="select h.hid,h.namee, h.location, h.quality, h.costs, h.vrooms, h.coste, h.vroome, h.costp, h.vroomp, h.isactive, h.isaccepted from hotel h where h.quality IN ("+first+")"+and+" h.location IN ("+second+");";
+		    PreparedStatement preStatement = connection.prepareStatement(query);
+		 
+		    int index = 1;
+		    for( Object o : quality ) {
+		       preStatement.setObject(  index++, o );
+		    }
+		    for( Object o : location ) {
+		       preStatement.setObject(  index++, o );
+		    }
+		    
+		    ResultSet rs = preStatement.executeQuery();
+		    while(rs.next()){
+		    	hoHotels.add(new hoHotels(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getString(11).charAt(0),rs.getString(12).charAt(0)));
+	        }
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+	}
+	public void search() {
+		this.getHoHotels().clear();
+		this.setHotelName(hotelName);
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/hotelreservation", "root", "");
+		    PreparedStatement preStatement = connection.prepareStatement("select h.hid,h.namee, h.location, h.quality, h.costs, h.vrooms, h.coste, h.vroome, h.costp, h.vroomp, h.isactive, h.isaccepted from hotel h where h.namee LIKE ? ESCAPE '!';");
+		    preStatement.setString(1, "%" + hotelName + "%");
+		    ResultSet rs = preStatement.executeQuery();
+		    while(rs.next()){
+		    	hoHotels.add(new hoHotels(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getString(11).charAt(0),rs.getString(12).charAt(0)));
+	        }
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
 	public VisitorPageBean() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 		    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/hotelreservation", "root", "");
-		    PreparedStatement preStatement = connection.prepareStatement("select h.namee, h.location, h.quality, h.costs, h.vrooms, h.coste, h.vroome, h.costp, h.vroomp, h.isactive, h.isaccepted from hotel h");
+		    PreparedStatement preStatement = connection.prepareStatement("select h.hid,h.namee, h.location, h.quality, h.costs, h.vrooms, h.coste, h.vroome, h.costp, h.vroomp, h.isactive, h.isaccepted from hotel h;");
 		    ResultSet rs = preStatement.executeQuery();
 		    while(rs.next()){
-		    	hoHotels.add(new hoHotels(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getString(10).charAt(0), rs.getString(11).charAt(0)));
+		    	hoHotels.add(new hoHotels(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getString(11).charAt(0),rs.getString(12).charAt(0)));
 	        }
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -50,6 +122,24 @@ public class VisitorPageBean {
 			System.out.println(e.toString());
 		}
 		return hoHotelsLocation;
+	}
+	public String getHotelName() {
+		return hotelName;
+	}
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+	}
+	public List<Integer> getQuality() {
+		return quality;
+	}
+	public void setQuality(List<Integer> quality) {
+		this.quality = quality;
+	}
+	public List<String> getLocation() {
+		return location;
+	}
+	public void setLocation(List<String> location) {
+		this.location = location;
 	}
 	
 

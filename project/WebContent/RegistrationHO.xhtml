@@ -89,7 +89,7 @@
 			</div>
 			<div style="float: right">
 				<p:calendar value="#{RegistrationBean.birthDate}"
-					pattern="yyyy-MM-dd" />
+					pattern="yyyy-MM-dd" maxdate="today" />
 			</div>
 		</div>
 		<br />
@@ -98,7 +98,10 @@
 				<h:outputText value="*Gender " style="font-size: 14pt"></h:outputText>
 			</div>
 			<div style="float: right">
-				<p:inputText value="#{RegistrationBean.gender}" required="true" />
+				<h:selectOneRadio value="#{RegistrationBean.gender}">
+   	<f:selectItem itemValue="m" itemLabel="Male" />
+   	<f:selectItem itemValue="f" itemLabel="Female" />
+</h:selectOneRadio>
 			</div>
 		</div>
 		<br />

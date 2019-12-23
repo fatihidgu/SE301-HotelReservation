@@ -45,8 +45,8 @@
 		padding-bottom:25px; width: 100%;float:left; background-color: #8FBC8F">
 
 			<div style="width: 30%; float: left;">
-				<p:inputText id="hotelname" style="font-size:22px;"
-					placeholder="Hotel Name" value="#{LoginBean.username}"
+				<p:inputText id="hotelName" style="font-size:22px;"
+					placeholder="Hotel Name" value="#{VisitorPageBean.hotelName}"
 					required="true" />
 			</div>
 			<div style="float: left; width: 60%;">
@@ -74,8 +74,8 @@
 			</div>
 			<h:commandButton value="Search"
 				style="border:1px solid black;float:right;margin-right:5%;font-size:28px;"
-				type="submit" actionListener="#{LoginBean.setValues()}"
-				action="#{LoginBean.userPage()}" />
+				type="submit" actionListener="#{VisitorPageBean.search}"
+				action="VisitorPage.xhtml" />
 
 		</h:form>
 	</h:body>
@@ -86,7 +86,7 @@
 				<h3 style="margin-bottom: 0px; font-size: 32px;">Quality</h3>
 				<p:selectManyCheckbox id="basic"
 					style="clear:both;font-size:22px;margin-top:-30px;"
-					value="#{checkboxView.selectedConsoles}">
+					value="#{VisitorPageBean.quality}">
 					<f:selectItem itemLabel="5 Star" itemValue="5" />
 					<br />
 					<f:selectItem itemLabel="4 Star" itemValue="4" />
@@ -105,7 +105,7 @@
 
 
 				<p:selectManyCheckbox id="ba" style="clear:both;font-size:22px;"
-					value="#{checkboxView.selectedCo}">
+					value="#{VisitorPageBean.location}">
 					<f:selectItem itemLabel="Istanbul" itemValue="istanbul" />
 					<br />
 					<f:selectItem itemLabel="Hatay" itemValue="hatay" />
@@ -115,7 +115,7 @@
 
 			<h:commandButton value="Filter"
 				style=" height: auto;font-size:24px;margin-top: 2%; margin-right: 8%"
-				actionListener="#{MakeResBean.take}" action="makeReservation.xhtml" />
+				actionListener="#{VisitorPageBean.filter()}" action="VisitorPage.xhtml" />
 
 
 		</h:form>
@@ -134,9 +134,13 @@
 						<br />
 						<h:outputText value="in #{hoHotels.location}" />
 						<br />
+						<h:outputText value="has #{hoHotels.quality} stars" />
+						<br/>
+						<h:commandButton value="Info" style="float: right; height: auto;font-size:26px;width:80px;margin-top: 2%; margin-right: 8%" type="submit" actionListener="#{commentBean.takeHotelId(hoHotels.id, hoHotels.name)}" action="makecomment.xhtml" />  
+						
 						<h:commandButton value="Make Reservation"
 							style="float: right; height: auto;font-size:26px;margin-top: 2%; margin-right: 8%"
-							actionListener="#{MakeResBean.takeHotelinfo(hoHotels.oldid,hoHotels.name)}"
+							actionListener="#{MakeResBean.takeHotelinfo(hoHotels.id,hoHotels.name)}"
 							action="makeReservation.xhtml" />
 					</p:column>
 				</p:dataTable>

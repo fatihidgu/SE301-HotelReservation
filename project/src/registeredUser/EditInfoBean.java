@@ -3,6 +3,7 @@ package registeredUser;
 import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
@@ -12,6 +13,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+
+import org.primefaces.shaded.owasp.esapi.Logger;
 
 import user.User;
 
@@ -77,6 +80,13 @@ import user.User;
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 		    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/hotelreservation", "root", "");
 		    return connection;
+		}
+		
+		public Date getMinAge() {
+		    Calendar currentDate = Calendar.getInstance();
+		    currentDate.add(Calendar.YEAR, -18);
+		    System.out.println("date max: "+currentDate);
+		    return currentDate.getTime();
 		}
 	
 	public String getName() {

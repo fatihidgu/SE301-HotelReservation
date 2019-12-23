@@ -78,6 +78,18 @@ public class MakeReservationBean  {
 		roomTypeNo();
 		}
 	
+	
+		public void takeHotelinfo(int hotelid,String hotelname) {
+		
+			setHotelid(hotelid);
+			setHotelname(hotelname);
+			
+			//hotel oda ve sayý bilgisi getir
+			roomTypeNo();
+			}
+	
+
+	
      //make reservationdan alýcak/güncellenecekler
 	public void takeReservationInfo(int numberofroom,String roomtype,Date startdate,Date enddate) {
 		
@@ -121,7 +133,7 @@ public class MakeReservationBean  {
 			while(rs.next()){  costOfRoom =	rs.getInt(1);}
 		}
 		
-		else if(roomtype.equals("presidental")) {
+		else if(roomtype.equals("presidential")) {
 			PreparedStatement preStatement = getConnectionDB().prepareStatement(" SELECT h.costp  \r\n" + 
 	                "FROM hotel h\r\n" + 
 	                "WHERE h.hid= ?   ");
@@ -182,7 +194,7 @@ public class MakeReservationBean  {
 			      preparedStmt.setInt    (9,res.getCost() );
 			      preparedStmt.execute();
 		
-			      changeRoomNumber();	
+			     
 			      payment();
 			      getConnectionDB().close();
 					
@@ -192,9 +204,13 @@ public class MakeReservationBean  {
 	}
 	
 	private void payment() {
-		balance = balance-cost;
+		   int checkBalance = balance;
+		   checkBalance = checkBalance-cost;
 		
-		 String query = "UPDATE `hotelreservation`.`registereduser` SET `balance` = ? WHERE (`rid` = '?');\r\n" + 
+		if(checkBalance>=0) {
+			balance = balance-cost;
+			
+			String query = "UPDATE `hotelreservation`.`registereduser` SET `balance` = ? WHERE (`rid` = ?);\r\n" + 
 		 		"";
 	      PreparedStatement preparedStmt;
 		try {
@@ -202,12 +218,15 @@ public class MakeReservationBean  {
 			preparedStmt.setInt  (1, balance);
 	        preparedStmt.setInt  (2, User.userid);
 	        preparedStmt.executeUpdate();
+	        changeRoomNumber();	
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} }else {
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Reservation failed: insufficient balance"));
+			
 		}
-	    
-	
 	}
 
 	public void changeRoomNumber(){
@@ -236,7 +255,7 @@ public class MakeReservationBean  {
 				while(rs.next()){  availableRoomNo =	rs.getInt(1);}
 			}
 			
-			else if(roomtype.equals("presidental")) {
+			else if(roomtype.equals("presidential")) {
 				PreparedStatement preStatement = getConnectionDB().prepareStatement(" SELECT h.vroomp  \r\n" + 
 		                "FROM hotel h\r\n" + 
 		                "WHERE h.hid= ?   ");
@@ -266,7 +285,7 @@ public class MakeReservationBean  {
 		      preparedStmt.setInt  (2, hotelid);
 		      preparedStmt.executeUpdate();}
 			
-			else if(roomtype.equals("presidental"))
+			else if(roomtype.equals("presidential"))
 			
 			{ String query = "UPDATE `hotelreservation`.`hotel` SET `vroomp` = ? WHERE (`hid` = ?);";
 		      PreparedStatement preparedStmt = getConnectionDB().prepareStatement(query);
@@ -288,9 +307,6 @@ public class MakeReservationBean  {
 	//////////////////////////////////////////////////////////////////////////
 	
 	
-	
-	
- 
 		public void onChange() {  
 		if(roomtype !=null && !roomtype.equals(""))  
 		setNumbermap(data.get(roomtype));  

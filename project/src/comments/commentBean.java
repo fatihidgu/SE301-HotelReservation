@@ -1,7 +1,7 @@
 package comments;
 
 import javax.annotation.PostConstruct;
-
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIViewRoot;
@@ -58,9 +58,6 @@ public class commentBean implements Serializable {
     public void takeHotelId(int hid, String name) {
     	setHotelid(hid);
     	setHotelname(name);
-    	System.out.println("geldi miiii   "+hid);
-    	System.out.println("gelmedi mi "+hotelid);
-    	System.out.println("çalýþýyor muyuz peki"+ hotelname);
 		try {
 		    PreparedStatement preStatement = getConnectionDB().prepareStatement("select h.namee, h.location, h.quality, h.costs, h.vrooms, h.coste, h.vroome, h.costp, h.vroomp from hotel h where h.hid=? and h.namee=? ");
 		    preStatement.setInt(1, hotelid);
@@ -90,11 +87,11 @@ public class commentBean implements Serializable {
 		    while(rs2.next()) {
 		    	
 		    	commentt.add(new comment(rs2.getString(1)));
-		    	System.out.println("yorumlaaaar"+rs2.getString(1));
+		  
 		    }
 		    
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			
 		}
     	
     	
@@ -103,7 +100,7 @@ public class commentBean implements Serializable {
     
     public void writecomment() {
     	try {
-    		System.out.println(getHotelid());
+    		
     		int cid=0;
 		    PreparedStatement preStatement = getConnectionDB().prepareStatement("SELECT count(*) FROM hotelreservation.commentt;");
 		    ResultSet rs = preStatement.executeQuery();
@@ -123,11 +120,19 @@ public class commentBean implements Serializable {
 		      res.setInt(4, User.userid);
 		      setText("");
 	    res.executeUpdate();
-	    
+	    if(res.executeUpdate()<=0) {
+	    	FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("You need to login first"));
+	    }
+	    else {
+	    	FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Comment added"));
+	    }
+	    reload();
 
 		    
     } catch (Exception e) {
-		System.out.println(e.toString());
+    	
 	}
     	
     }

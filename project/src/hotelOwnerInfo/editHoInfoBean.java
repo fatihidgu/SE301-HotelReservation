@@ -37,7 +37,7 @@ public class editHoInfoBean {
 		    	setGender(rs.getString(5));
 		    }
 		} catch (Exception e) {
-			System.out.println(e.toString());
+		
 		}
 	}
 	
@@ -57,7 +57,7 @@ public class editHoInfoBean {
 			preparedStmt2.executeUpdate();
 			
 		}catch(Exception  ex) { 
-			System.out.println(ex.toString());
+		
 		}
 	}
 	

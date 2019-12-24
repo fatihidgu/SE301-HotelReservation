@@ -48,7 +48,7 @@ import user.User;
 		    	
 	        }
 		} catch (Exception e) {
-			System.out.println(e.toString());
+	
 		}}
 	 
 	 
@@ -72,7 +72,7 @@ import user.User;
 			      preparedStmt2.executeUpdate();
 			
 			      
-				}catch(Exception  ex) { System.out.println(ex);}
+				}catch(Exception  ex) { }
 		 }
 	
 
@@ -85,7 +85,7 @@ import user.User;
 		public Date getMinAge() {
 		    Calendar currentDate = Calendar.getInstance();
 		    currentDate.add(Calendar.YEAR, -18);
-		    System.out.println("date max: "+currentDate);
+	
 		    return currentDate.getTime();
 		}
 	

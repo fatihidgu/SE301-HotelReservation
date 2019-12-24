@@ -32,7 +32,7 @@ public class RegisteredUserBean {
 		    	regUser.add(new RegisteredUser(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5), rs.getString(6)));
 	        }
 		} catch (Exception e) {
-			System.out.println(e.toString());
+		
 		}
 	}
 	
@@ -53,7 +53,7 @@ public void SendDeleteRequest() {
 	    
 		
 	      
-		}catch(Exception  ex) {System.out.println("SendDeleteRequest() de hata");}
+		}catch(Exception  ex) {}
 	
 		
 	}

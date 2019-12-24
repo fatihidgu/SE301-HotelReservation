@@ -75,7 +75,7 @@ public class RegistrationBean {
 				User.add(new User(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(4)));
 			}
 		} catch (Exception e) {
-			System.out.println(e.toString());
+	
 		}
 	}
 
@@ -90,25 +90,24 @@ public class RegistrationBean {
 				ResultSet rs = preStatement.executeQuery();
 				//userid = rs.getInt(1);
 				while(rs.next()){ userid = rs.getInt(1);}
-				System.out.print("userid is:"+userid);
+		
 				userid++;
 
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-				System.out.println(e.toString());
-				System.out.println("userid hatasý");
+			
 			}
 			try {
-				String query2 = "INSERT INTO hotelreservation.users(userid,email,passw,typee,isdeleted) VALUES (?,?,?,?,?)";
-				PreparedStatement preparedStmt2 = getConnectionDB().prepareStatement(query2);
+				//String query2 = "INSERT INTO hotelreservation.users(userid,email,passw,typee,isdeleted) VALUES (?,?,MD5(?),?,?);";
+				PreparedStatement preparedStmt2 = getConnectionDB().prepareStatement("INSERT INTO hotelreservation.users(userid,email,passw,typee,isdeleted) VALUES (?,?,MD5(?),?,?);");
 				preparedStmt2.setInt(1, userid);
 				preparedStmt2.setString(2, email);
-				preparedStmt2.setString(3, password);
+				preparedStmt2.setString(3,password);
 				preparedStmt2.setString(4, typee);
 				preparedStmt2.setInt(5, 0);
 				preparedStmt2.executeUpdate();
 
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-				System.out.println(e.toString());
+			System.out.println(e.toString());
 			}
 			if(typee=="r") {
 			try {
@@ -127,7 +126,7 @@ public class RegistrationBean {
 				preparedStmt4.executeUpdate();
 				
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-				System.out.println(e.toString());
+			
 			}
 			}else if(typee=="h") {
 				try {
@@ -145,14 +144,14 @@ public class RegistrationBean {
 					preparedStmt4.executeUpdate();
 					
 				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-					System.out.println(e.toString());
+				
 				}
 			}
 
 			
 
 		} catch (Exception ex) {
-			System.out.println(ex);
+		
 		}
 	}
 

@@ -69,7 +69,7 @@ private List<comment> comments = new ArrayList<>();
 		   
 		    
 		} catch (Exception e) {
-		System.out.println("olmadý amaaaa olmaz kiii");
+	
 		}
 	}
 	
@@ -105,14 +105,11 @@ hot.setString(1, Today);
 hot.setInt(2, id);
 ResultSet hot1 = hot.executeQuery();
 while(hot1.next()) {
-	System.out.println("kardþeim þuraya gelir misin");
-System.out.println("hotel id"+hot1.getString(1));//hotel id
-System.out.println("oda sayýsý"+hot1.getString(2));//oda sayýsý
-System.out.println("oda tipi "+hot1.getString(3));// oda tipi
+
 
 //tüm rezervasyon odalarýný boþalt
 if(hot1.getString(3).equals("s")) {
-	System.out.println("oldu lan oldu olduuu");
+
 	PreparedStatement hot2 = getConnectionDB().prepareStatement(" SELECT vrooms FROM hotelreservation.hotel\r\n" + 
 			"where hid=?");
 	hot2.setInt(1, hot1.getInt(1));
@@ -138,7 +135,7 @@ if(hot1.getString(3).equals("e")) {
 		bosoda=hot3.getInt(1);
 	}
 	bosoda=bosoda+hot1.getInt(2);
-	System.out.println("oldu lan oldu olduuu2");
+
 PreparedStatement clearroom = getConnectionDB().prepareStatement("UPDATE hotelreservation.hotel SET vroome = ?  WHERE (hid = ?)");
 clearroom.setInt   (1,bosoda);
 clearroom.setString(2, hot1.getString(1));
@@ -155,7 +152,7 @@ if(hot1.getString(3).equals("p")) {
 		bosoda=hot3.getInt(1);
 	}
 	bosoda=bosoda+hot1.getInt(2);
-	System.out.println("oldu lan oldu olduuu1");
+
 PreparedStatement clearroom = getConnectionDB().prepareStatement("UPDATE hotelreservation.hotel SET vroomp = ?  WHERE (hid = ?)");
 clearroom.setInt   (1,bosoda);
 clearroom.setString(2, hot1.getString(1));
@@ -249,14 +246,14 @@ clearroom.executeUpdate();
         	
         }
 		}catch(Exception  ex) {
-			System.out.println("something wrong exception");
+
 		}
 	
 		
 	}
 	
 	public void accept(int id,String name) {
-	System.out.println("broo name burda "+name);
+
 	      try {
 	    	  PreparedStatement res = getConnectionDB().prepareStatement("UPDATE hotelreservation.hotel SET isaccepted = 1 WHERE (hid = ?) and (namee = ?);\r\n" + 
 	    	  		"");
@@ -264,14 +261,14 @@ clearroom.executeUpdate();
 	      res.setString(2, name);
         res.executeUpdate();
 		} catch (Exception e) {
-			System.out.println("Hata ");
+			
 		}
 	      
 		
 		
 	}
 	public void decline(int id,String name) {
-		System.out.println("broo name burda "+name);
+	
 	      try {
 	    	  PreparedStatement res = getConnectionDB().prepareStatement("UPDATE hotelreservation.hotel SET isaccepted = 2 WHERE (hid = ?) and (namee = ?);\r\n" + 
 	    	  		"");
@@ -279,7 +276,7 @@ clearroom.executeUpdate();
 	      res.setString(2, name);
       res.executeUpdate();
 		} catch (Exception e) {
-			System.out.println("Hata ");
+		
 		}
 	      
 		
@@ -292,7 +289,7 @@ clearroom.executeUpdate();
 	      res.setInt(1, id);
     res.executeUpdate();
 		} catch (Exception e) {
-			System.out.println("Hata ");
+		
 		}
 	}
 	

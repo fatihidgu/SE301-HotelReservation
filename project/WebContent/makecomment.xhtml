@@ -53,7 +53,8 @@
     		  <td><h:inputTextarea value="#{commentBean.text}" cols="50" rows="15" update="Refresh" /></td>
     		</tr> 
     		</table>
-    		<h:commandButton value="Submit" actionListener="#{commentBean.writecomment}" action="commentmain.xhtml" />
+    		<h:commandButton value="Submit" actionListener="#{commentBean.writecomment}" />
+    		<h:commandButton value="Main Page" action="VisitorPage1" />
     	  </h:form>
  
 </h:body>

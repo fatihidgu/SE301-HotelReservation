@@ -44,7 +44,7 @@ public class ReservationBean {
 		    	reservationss.add(new Reservation(rs.getString(1), rs.getDate(2), rs.getDate(3), rs.getInt(4), rs.getString(5),rs.getInt(6),rs.getInt(7)));
 	        }
 		} catch (Exception e) {
-			System.out.println(e.toString());
+		
 		}
 	}
 	
@@ -139,7 +139,7 @@ public void changeRoomNumber(int resid){
 						ResultSet rs2 = preStatement2.executeQuery();
 						while(rs2.next()){  RoomNo =	rs2.getInt(1);}
 						
-						System.out.println("e de kalan oda:"+RoomNo);
+						
 					}
 					
 					else if(roomtype.equals("p")) {

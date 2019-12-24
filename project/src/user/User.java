@@ -1,9 +1,9 @@
 package user;
 
 public class User {
-	public static int userid = 1;//3
-	public static String email;//furki@gmail.com
-	public static String typee;//r
+	public static int userid;
+	public static String email;
+	public static String typee;
 	
 	 public User(int userid, String email, String typee) {
 	    User.userid = userid;
@@ -34,4 +34,5 @@ public class User {
 		String user=this.userid+","+this.email+","+"this.typee";
 		return user;
 	}
+
 }

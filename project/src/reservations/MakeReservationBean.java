@@ -27,8 +27,8 @@ public class MakeReservationBean  {
  
 	private	int hotelid;
     private String hotelname;
-	private	Date startdate; 
-    private	Date enddate; 
+	private	Date startdate = new Date(); 
+    private	Date enddate = new Date(); ; 
 	private	int numberofroom; 
 	private	String roomtype; 
 	private int cost;
@@ -43,7 +43,7 @@ public class MakeReservationBean  {
 			
 			
 		} catch (Exception e) {
-			System.out.println(e.toString());
+		
 		}}
 	  
 	  public void getBalaanceDB() {
@@ -61,7 +61,7 @@ public class MakeReservationBean  {
 			    setBalance(rs.getInt(1));
 		        }
 			} catch (Exception e) {
-				System.out.println(e.toString());
+				
 			}
 		}
 	  
@@ -169,7 +169,7 @@ public class MakeReservationBean  {
 			    
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 			
-			System.out.println("exception");
+		
 		}
 	
 	    //reservation create
@@ -198,7 +198,7 @@ public class MakeReservationBean  {
 			      payment();
 			      getConnectionDB().close();
 					
-		}catch(Exception ex) {System.out.println(ex);}
+		}catch(Exception ex) {}
 		
 		
 	}

@@ -38,7 +38,7 @@ public class PastReservationBean {
 		    	 pastreservationss.add(new Reservation(rs.getString(1), rs.getDate(2), rs.getDate(3), rs.getInt(4), rs.getString(5),rs.getInt(6),rs.getInt(7)));
 	        }
 		} catch (Exception e) {
-			System.out.println(e.toString());
+		
 		}
 	}
 	

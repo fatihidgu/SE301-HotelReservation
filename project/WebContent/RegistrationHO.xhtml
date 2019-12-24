@@ -13,17 +13,17 @@
 	<h:form id="header"
 		style="margin-top: 2%; border: 1px solid black; height: 120px; width: 100%; background-color: #8FBC8F">
 		<div style="float: left; margin-top: 0.8%; margin-left: 1%">
-			<h:commandLink id="ho-logo-id" action="registerUser.xhtml">
-				<h:graphicImage url="WebContent\resources\images\logo.png"
+			<h:commandLink id="ho-logo-id" action="VisitorPage1.xhtml">
+				<h:graphicImage url="C:\Users\FATIH.IDGU\eclipse-workspace\tatil\WebContent\resources\images\logo.png"
 					style="width: 100px; height: 100px;"></h:graphicImage>
 			</h:commandLink>
 		</div>
 		<div style="margin-left: 82%; margin-top: 3.5%">
-			<h:commandLink id="ho-name-id" action="registerUser.xhtml">
-				<h:outputText value="MY ACCOUNT"></h:outputText>
-			</h:commandLink>
-			<h:commandButton value="LOGOUT" style="margin-left:3%; height: 25px"
-				type="submit" action="#{user.goLoginPage}" />
+			<h:commandButton value="Register" style="margin-left:3%; height: 25px"
+				type="submit" action="registar.xhtml" />
+
+			<h:commandButton value="LOGIN" style="margin-left:3%; height: 25px"
+				type="submit" action="login.xhtml" />
 		</div>
 	</h:form>
 </h:body>
@@ -59,11 +59,22 @@
 				<h:outputText value="*E-mail " style="font-size: 14pt"></h:outputText>
 			</div>
 			<div style="float: right">
-				<p:inputText value="#{RegistrationBean.email}" required="true" />
+				
+				<p:inputText id="email" required="true" label="email" size="20"
+		requiredMessage="Please enter your email address."
+		validatorMessage="Invalid email format"
+		value="#{RegistrationBean.email}">
+
+	  <f:validateRegex
+		pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+	</p:inputText>
+	<p:watermark for="email" value="Email Address *" />
+	<p:message for="email" />
 			</div>
 		</div>
 		<br />
-		<div style="margin-top: 5%">
+		<div style="margin-top: 8%">
 			<div style="float: left">
 				<h:outputText value="*Password " style="font-size: 14pt"></h:outputText>
 			</div>
@@ -74,7 +85,7 @@
 		<br />
 		<div style="margin-top: 3%">
 			<div style="float: left">
-				<h:outputText value="*Phone number: " style="font-size: 14pt"></h:outputText>
+				<h:outputText value="*Phone number: " style="font-size: 14pt" ></h:outputText>
 			</div>
 			<div style="float: right">
 				<p:inputText value="#{RegistrationBean.pnumber}" required="true">
@@ -88,8 +99,7 @@
 				<h:outputText value="*Birthday: " style="font-size: 14pt"></h:outputText>
 			</div>
 			<div style="float: right">
-				<p:calendar value="#{RegistrationBean.birthDate}"
-					pattern="yyyy-MM-dd" maxdate="today" />
+				<p:calendar maxdate="#{EditInBean.getMinAge()}" value="#{RegistrationBean.birthDate}" pattern="yyyy-MM-dd" required="true" />
 			</div>
 		</div>
 		<br />
@@ -98,7 +108,7 @@
 				<h:outputText value="*Gender " style="font-size: 14pt"></h:outputText>
 			</div>
 			<div style="float: right">
-				<h:selectOneRadio value="#{RegistrationBean.gender}">
+				<h:selectOneRadio value="#{RegistrationBean.gender}" required="true">
    	<f:selectItem itemValue="m" itemLabel="Male" />
    	<f:selectItem itemValue="f" itemLabel="Female" />
 </h:selectOneRadio>

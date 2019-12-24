@@ -47,7 +47,7 @@ public class hoHotelsEditBean {
 			preparedStmt2.executeUpdate();
 			
 		}catch(Exception  ex) { 
-			System.out.println(ex.toString());
+		
 		}
 	}
 	
@@ -72,7 +72,7 @@ public class hoHotelsEditBean {
 		    	setVroomp(rs.getInt(9));
 		    }
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			
 		}
 	}
 	

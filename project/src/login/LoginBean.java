@@ -12,12 +12,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-
 import user.User;
 
 @ManagedBean (name="LoginBean")
@@ -42,7 +42,7 @@ public class LoginBean {
 			
 			 PreparedStatement preStatement = getConnectionDB().prepareStatement(" SELECT u.userid, u.email, u.passw,u.typee,u.isdeleted\r\n" + 
 		        		"	        FROM users u\r\n" +
-		      		"	            WHERE u.email=? AND u.passw =? AND u.isdeleted=0");
+		      		"	            WHERE u.email=? AND u.passw = MD5(?) AND u.isdeleted=0");
 
          preStatement.setString(1, getUsername()); 
          preStatement.setString(2, getPassword());
@@ -51,21 +51,26 @@ public class LoginBean {
 		    	User.add(new User(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(4)));
 	        }
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			
+		
 		}
 	}
 	public String userPage() {
+	
+		if(User.size()==0) {
+			return "VisitorPage1.xhtml";
+		}
 		String typee=User.get(0).getTypee();
 		if(typee.equals("r")) {
 			return "registerUser.xhtml";
 		}else if(typee.equals("h")){
 			return "hotelOwnerMainPage.xhtml";
-		}else if(typee=="a"){
+		}else if(typee.equals("a")){
 			return "admin.xhtml";
 		}else {
-			return "VisitorPage.xhtml";
+			return "VisitorPage1.xhtml";
 		}
-
+		
 	}
 	
 
@@ -87,6 +92,12 @@ public void setUsername(String username) {
 
 public String getPassword() {
 	return password;
+}
+public void logout() {
+	user.User.userid=-1;
+	user.User.typee="";
+	user.User.email="";
+	
 }
 
 public void setPassword(String password) {

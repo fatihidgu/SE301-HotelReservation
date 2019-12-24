@@ -8,13 +8,18 @@ import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import comments.comment;
 import user.User;
 
 @ManagedBean (name="hoHotelsBean")
 @RequestScoped
 public class hoHotelsBean {
 	private List<hoHotels> hoHotels = new ArrayList<>();
-	private List<String> comments = new ArrayList<>();
+	private List<comment> comments = new ArrayList<>();
+	
+	private String name;
+	private String lastname;
+	private String text;
 	
 	public hoHotelsBean() {
 		try {
@@ -98,15 +103,20 @@ public class hoHotelsBean {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 		    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/hotelreservation", "root", "");
-		    
-		    PreparedStatement preparedStmt = connection.prepareStatement("select textt from commentt where id = ?");
+		    	    	    
+		    PreparedStatement preparedStmt = connection.prepareStatement("select r.namee, r.lastname, c.textt from registereduser r, commentt c where c.hotelid = ? and r.rid in (select userid from commentt where hotelid = ?);");
 		    preparedStmt.setInt(1, id);
+		    preparedStmt.setInt(2, id);
 		    
 		    ResultSet rs = preparedStmt.executeQuery();
 		    
 		    while (rs.next()) {
-				rs.getInt(1); // xhtml hazýrlanacak comment arrayi
+		    	name = rs.getString(1);
+		    	lastname = rs.getString(2);
+		    	text = rs.getString(3);
+		    	comments.add(new comment(name, lastname, text));
 			}
+		    
 		} catch(Exception ex) {
 			System.out.println(ex.toString());
 		}
@@ -114,5 +124,33 @@ public class hoHotelsBean {
 	
 	public List<hoHotels> getHoHotels() {
 		return hoHotels;
+	}
+	
+	public List<comment> getComments(){
+		return comments;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getLastname() {
+		return lastname;
+	}
+	
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+	
+	public String getText() {
+		return text;
+	}
+	
+	public void setText(String text) {
+		this.text = text;
 	}
 }

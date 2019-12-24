@@ -27,6 +27,13 @@ public comment(String rname, String hname,  String text, int oldid) {
 	this.text=text;
 	this.oldid=oldid;
 }
+
+
+//hotelowner özel
+public comment(String name, String lastname, String text) {
+	rname = name + " " + lastname;
+	this.text = text;
+}
 public int getId() {
 	return id;
 }

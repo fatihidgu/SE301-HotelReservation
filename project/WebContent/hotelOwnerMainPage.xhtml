@@ -101,7 +101,7 @@
         			<h:commandButton value="EDIT" style="margin-left:3%; height: 23px" type="submit" actionListener="#{hoHotelsEditBean.takeHotelId(hoHotels.id)}" action="editHoHotel.xhtml" />
         			<h:commandButton value="ACTIVATE" style="margin-left:3%; height: 23px" type="submit" actionListener="#{hoHotelsBean.ActiveHotel(hoHotels.id)}" />
         			<h:commandButton value="DEACTIVATE" style="margin-left:3%; height: 23px" type="submit" actionListener="#{hoHotelsBean.DeactiveHotel(hoHotels.id)}" />
-        			<h:commandButton value="COMMENTS" style="margin-left:3%; height: 23px" type="submit" actionListener="#{hoHotelsBean.CommentOfHotel(hoHotels.id)}" />
+        			<h:commandButton value="COMMENTS" style="margin-left:3%; height: 23px" type="submit" actionListener="#{hoHotelsBean.CommentOfHotel(hoHotels.id)}" action="hoComments.xhtml" />
     			</p:column>
 				</p:dataTable>
             </h:panelGrid>

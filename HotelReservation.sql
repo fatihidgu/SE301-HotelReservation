@@ -2,7 +2,7 @@ CREATE SCHEMA `hotelreservation` ;
 CREATE TABLE users (
 userid  integer not null,
 email varchar(25) not null unique,
-passw varchar(15) not null,
+passw varchar(425) not null,
 typee char(1) not null,
 isdeleted char(1) not null,
 primary key (userid,email)

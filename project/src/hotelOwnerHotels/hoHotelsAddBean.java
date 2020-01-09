@@ -40,7 +40,7 @@ public class hoHotelsAddBean {
 		    PreparedStatement preparedStmt2 = connection.prepareStatement("insert into hotel (hid, hownerid, namee, location, quality, costs, vrooms, coste, vroome, costp, vroomp, isactive, isaccepted) values (?,?,?,?,?,?,?,?,?,?,?,?,?);");
 			
 		    preparedStmt2.setInt(1, (size+1));
-		    preparedStmt2.setInt(2, User.userid);
+		    preparedStmt2.setInt(2, User.getUserid());
 			preparedStmt2.setString(3,name);
 			preparedStmt2.setString(4,location);
 			preparedStmt2.setInt(5,quality);

@@ -35,7 +35,7 @@ import user.User;
 		        	"	        FROM registereduser r, users u\r\n" +
 		      		"	        WHERE u.email=? AND u.userid = r.rid ");
 
-                preStatement.setString(1, User.email); 
+                preStatement.setString(1, User.getEmail()); 
                 ResultSet rs = preStatement.executeQuery();
 		    
 		    
@@ -66,7 +66,7 @@ import user.User;
 			      preparedStmt2.setString  (2,lastName);
 			      preparedStmt2.setString  (3,pnumber);
 			      preparedStmt2.setString  (4,bday);
-			      preparedStmt2.setInt     (5,User.userid);
+			      preparedStmt2.setInt     (5,User.getUserid());
 			      
 	
 			      preparedStmt2.executeUpdate();

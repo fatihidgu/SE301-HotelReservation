@@ -117,7 +117,7 @@ public class commentBean implements Serializable {
 		
 		      res.setString(3, getText());
 		     
-		      res.setInt(4, User.userid);
+		      res.setInt(4, User.getUserid());
 		      setText("");
 	    res.executeUpdate();
 	    if(res.executeUpdate()<=0) {

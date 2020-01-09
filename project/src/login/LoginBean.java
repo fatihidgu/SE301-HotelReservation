@@ -26,43 +26,75 @@ public class LoginBean {
 	private String username;
 	private String password;
 	
-	private List<User> User = new ArrayList<>();
 	
 	public LoginBean() {
 		
 	}
-	
-	public List<User> getUser() {
-		return User;
-	}
+
 	public void setValues() {
+		
 		this.setUsername(username);
 		this.setPassword(password);
+
 		try {
-			
-			 PreparedStatement preStatement = getConnectionDB().prepareStatement(" SELECT u.userid, u.email, u.passw,u.typee,u.isdeleted\r\n" + 
-		        		"	        FROM users u\r\n" +
-		      		"	            WHERE u.email=? AND u.passw = MD5(?) AND u.isdeleted=0");
+		
+			 PreparedStatement preStatement = getConnectionDB().prepareStatement("SELECT u.userid, u.email, u.passw, u.typee, u.isdeleted\r\n" + 
+			 		"FROM users u\r\n" + 
+			 		"	WHERE u.email= ? AND u.passw = MD5(?) AND u.isdeleted=0");
 
          preStatement.setString(1, getUsername()); 
          preStatement.setString(2, getPassword());
          ResultSet rs = preStatement.executeQuery();
-		    while(rs.next()){
-		    	User.add(new User(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(4)));
-	        }
+        
+         while(rs.next()){
+		    	User.setUserid(Integer.parseInt(rs.getString(1)));
+		    	User.setEmail(rs.getString(2));
+		    	User.setTypee(rs.getString(4));
+		   
+		    }
+     	String typee=User.getTypee();
+         if(typee.equals("r")) {
+    		 PreparedStatement preStatement1 = getConnectionDB().prepareStatement("SELECT r.namee\r\n" + 
+ 			 		"FROM registereduser r\r\n" + 
+ 			 		"	WHERE r.rid= ?");
+
+          preStatement1.setInt(1, User.getUserid()); 
+          ResultSet rs1 = preStatement1.executeQuery();
+          while(rs1.next()){
+ 		    User.setName(rs1.getString(1));
+ 		    }
+ 			
+ 		}else if(typee.equals("h")){
+ 			 PreparedStatement preStatement1 = getConnectionDB().prepareStatement("SELECT h.namee\r\n" + 
+  			 		"FROM hotelowner h\r\n" + 
+  			 		"	WHERE h.hoid= ?");
+           preStatement1.setInt(1, User.getUserid()); 
+           ResultSet rs1 = preStatement1.executeQuery();
+           while(rs1.next()){
+  		    User.setName(rs1.getString(1));
+  		    }
+ 			
+ 		}else if(typee.equals("a")){
+ 			User.setName(User.getEmail());
+ 		
+ 		}
+		    
 		} catch (Exception e) {
-			
+			System.out.println("buraya geldim");
+			System.out.println(e);
 		
 		}
 	}
 	public String userPage() {
 	
-		if(User.size()==0) {
-			return "VisitorPage1.xhtml";
+		if(User.getUserid()==-1) {
+			return "";
 		}
-		String typee=User.get(0).getTypee();
+	
+		String typee=User.getTypee();
+		System.out.println("type:"+typee);
 		if(typee.equals("r")) {
-			return "registerUser.xhtml";
+			return "VisitorPage.xhtml";
 		}else if(typee.equals("h")){
 			return "hotelOwnerMainPage.xhtml";
 		}else if(typee.equals("a")){
@@ -94,9 +126,9 @@ public String getPassword() {
 	return password;
 }
 public void logout() {
-	user.User.userid=-1;
-	user.User.typee="";
-	user.User.email="";
+	User.setUserid(-1);;
+	User.setEmail("");
+	User.setTypee("");
 	
 }
 

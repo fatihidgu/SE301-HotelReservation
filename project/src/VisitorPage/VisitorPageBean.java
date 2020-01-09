@@ -15,6 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
 import hotelOwnerHotels.hoHotels;
+import reservations.ReservationInfo;
 import user.User;
 
 @ManagedBean (name="VisitorPageBean")
@@ -24,6 +25,7 @@ public class VisitorPageBean {
 	private String hotelName="";
 	private List<Integer> quality=new ArrayList<>();
 	private List<String> location=new ArrayList<>();
+	public String userna=User.getName();
 	
 	
 	public List<hoHotels> getHoHotels() {
@@ -154,6 +156,18 @@ public class VisitorPageBean {
 	public void reload() throws IOException {
 	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 	    ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+	}
+	
+	public void HotelInfo(String hotelName, int hotelId) {
+		ReservationInfo.setHotelId(hotelId);
+		ReservationInfo.setHotelName(hotelName);
+	}
+	
+	public String getUserna() {
+		return userna;
+	}
+	public void setUserna(String userna) {
+		this.userna = userna;
 	}
 	
 

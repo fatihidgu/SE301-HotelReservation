@@ -35,7 +35,7 @@ public class ReservationBean {
 	                "WHERE u.email=? and u.userid = r.rid and res.userid=r.rid and res.hotelid=h.hid and res.enddate >= ? and res.iscancelld ='0' ");
 
 
-	preStatement.setString(1, User.email);
+	preStatement.setString(1, User.getEmail());
 	preStatement.setString(2, Today);
 	ResultSet rs = preStatement.executeQuery();
 		    
@@ -71,7 +71,7 @@ public class ReservationBean {
 	      
 	      //yeni balance hesapla
 	         PreparedStatement preStatement = getConnectionDB().prepareStatement(" SELECT r.balance FROM registereduser r, users u WHERE u.email=? AND u.userid = r.rid ");
-             preStatement.setString(1, User.email); 
+             preStatement.setString(1, User.getEmail()); 
              ResultSet rs = preStatement.executeQuery();
 		     
 		     Double balance= 1.0;
@@ -85,7 +85,7 @@ public class ReservationBean {
 		      String query2 = "UPDATE `hotelreservation`.`registereduser` SET `balance` = ? WHERE (`rid` = ?);";
 		      PreparedStatement preparedStmt2 = getConnectionDB().prepareStatement(query2);
 		      preparedStmt2.setDouble  (1,balance );
-		      preparedStmt2.setInt     (2,User.userid);
+		      preparedStmt2.setInt     (2,User.getUserid());
 		      
               preparedStmt2.executeUpdate();
               getConnectionDB().close();

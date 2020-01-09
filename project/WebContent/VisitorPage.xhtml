@@ -20,14 +20,17 @@
 	<h:form id="header"
 		style="margin-top: 2%; border: 1px solid black; height: 120px; width: 100%; background-color: #8FBC8F">
 		<div style="float: left; margin-top: 0.8%; margin-left: 1%">
+		
 			<h:commandLink id="ho-logo-id" action="VisitorPage.xhtml">
-				<h:graphicImage url="C:\Users\FATIH.IDGU\eclipse-workspace\tatil\WebContent\resources\images\logo.png"
+				<h:graphicImage url="/resources\images\logo.png"
 					style="width: 100px; height: 100px;"></h:graphicImage>
 			</h:commandLink>
+			
 		</div>
-		<div style="margin-left: 82%; margin-top: 3.5%">
+		<h3 style="margin-bottom: 0px; font-size: 32px;">Welcome to tatiloradaburada.com</h3>
+<div style="margin-left: 82%; ">
 			<h:commandLink id="ho-name-id" action="registerUser.xhtml">
-				<h:outputText value="MY ACCOUNT"></h:outputText>
+				<h:outputText value="#{VisitorPageBean.userna}" ></h:outputText>
 			</h:commandLink>
 
 			<h:commandButton value="LOGOUT" style="margin-left:3%; height: 25px" type="submit" action="VisitorPage1.xhtml" actionListener="#{LoginBean.logout}"/>
@@ -48,26 +51,7 @@
 					placeholder="Hotel Name" value="#{VisitorPageBean.hotelName}"
 					required="true" />
 			</div>
-			<div style="float: left; width: 60%;">
-				<h:outputText value="Beginning Date "
-					style="float:left;font-size: 22pt"></h:outputText>
-
-				<div style="width: 40%; float: left;">
-					<p:calendar id="startDate" value="#{MakeResBean.startdate}" pattern="yyyy-MM-dd" mindate="today" maxdate="#{MakeResBean.enddate}">
-     <p:ajax event="dateSelect" update="endDate"/>
-</p:calendar>
-				</div>
-				<div>
-					<h:outputText value="Ending Date "
-						style="float:left;font-size: 22pt"></h:outputText>
-				</div>
-				<div style="float: left;">
-					<p:calendar  id="endDate" value="#{MakeResBean.enddate}" pattern="yyyy-MM-dd" mindate="#{MakeResBean.startdate}" >
-      <p:ajax event="dateSelect" update="startDate"/>
- </p:calendar>
-				</div>
-				<br />
-			</div>
+		
 			<h:commandButton value="Search"
 				style="border:1px solid black;float:right;margin-right:5%;font-size:28px;"
 				type="submit" actionListener="#{VisitorPageBean.search}"
@@ -136,10 +120,9 @@
 						
 						<h:commandButton value="Make Reservation"
 							style="float: right; height: auto;font-size:26px;margin-top: 2%; margin-right: 8%"
-							actionListener="#{MakeResBean.takeHotelinfo(hoHotels.id,hoHotels.name)}"
+							actionListener="#{VisitorPageBean.HotelInfo(hoHotels.name,hoHotels.id)}"
 							action="makeReservation.xhtml" />
-							<h:commandButton value="oguz"
-							style="float: right; height: auto;font-size:26px;margin-top: 2%; margin-right: 8%" action="VisitorPage1.xhtml" actionListener="#{LoginBean.logout}"/>
+							
 					</p:column>
 				</p:dataTable>
 			</h:panelGrid>

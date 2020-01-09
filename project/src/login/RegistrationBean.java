@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -23,6 +24,7 @@ public class RegistrationBean {
 	private String email;
 	private String password;
 	private int pnumber;
+	private String p1;
 	private Date birthDate;
 	private String gender;
 	private String typee;
@@ -37,19 +39,15 @@ public class RegistrationBean {
 		this.typee = typee;
 	}
 
-	private List<User> User = new ArrayList<>();
+	
 
-	public void setUser(List<User> user) {
-		User = user;
-	}
+
 
 	public RegistrationBean() {
 
 	}
 
-	public List<User> getUser() {
-		return User;
-	}
+
 	public void insertR() {
 		this.setTypee("r");
 		this.insertUser();
@@ -59,7 +57,7 @@ public class RegistrationBean {
 		this.insertUser();
 	}
 
-	public void setValues() {
+	/*public void setValues() {
 		// this.setUsername(username);
 		this.setPassword(password);
 		try {
@@ -77,7 +75,7 @@ public class RegistrationBean {
 		} catch (Exception e) {
 	
 		}
-	}
+	}*/
 
 	public void insertUser() {
 
@@ -218,5 +216,10 @@ public class RegistrationBean {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-
+public String getP1() {
+	return p1;
+}
+public void setP1(String p1) {
+	this.p1 = p1;
+}
 }

@@ -1,21 +1,22 @@
 package user;
 
-public class User {
-	public static int userid;
-	public static String email;
-	public static String typee;
+public abstract class User {
+	private static int userid;// = 3;
+	private static String email; //= "furki@gmail.com";
+	private static String typee;
+	private static int balance;
 	
-	 public User(int userid, String email, String typee) {
-	    User.userid = userid;
-		User.email = email;
-		User.typee = typee;
-		System.out.println(userid+email+typee);	
-	}
 	 public static int getUserid() {
 		return userid;
 	}
 	public static void setUserid(int userid) {
 		User.userid = userid;
+	}
+	public static int getBalance() {
+		return balance;
+	}
+	public static void setBalance(int balance) {
+		User.balance = balance;
 	}
 	public static String getEmail() {
 		return email;

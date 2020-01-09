@@ -37,19 +37,15 @@ public class RegistrationBean {
 		this.typee = typee;
 	}
 
-	private List<User> User = new ArrayList<>();
+	
 
-	public void setUser(List<User> user) {
-		User = user;
-	}
+
 
 	public RegistrationBean() {
 
 	}
 
-	public List<User> getUser() {
-		return User;
-	}
+
 	public void insertR() {
 		this.setTypee("r");
 		this.insertUser();
@@ -59,7 +55,7 @@ public class RegistrationBean {
 		this.insertUser();
 	}
 
-	public void setValues() {
+	/*public void setValues() {
 		// this.setUsername(username);
 		this.setPassword(password);
 		try {
@@ -77,7 +73,7 @@ public class RegistrationBean {
 		} catch (Exception e) {
 	
 		}
-	}
+	}*/
 
 	public void insertUser() {
 

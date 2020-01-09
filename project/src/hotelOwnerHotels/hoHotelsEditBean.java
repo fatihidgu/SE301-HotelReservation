@@ -41,7 +41,7 @@ public class hoHotelsEditBean {
 			preparedStmt2.setInt(7,vroome);
 			preparedStmt2.setInt(8,costp);
 			preparedStmt2.setInt(9,vroomp);
-			preparedStmt2.setInt(10,User.userid);
+			preparedStmt2.setInt(10,User.getUserid());
 			preparedStmt2.setInt(11,id);
 			
 			preparedStmt2.executeUpdate();
@@ -57,7 +57,7 @@ public class hoHotelsEditBean {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 		    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/hotelreservation", "root", "");
 		    PreparedStatement preStatement = connection.prepareStatement("select h.namee, h.location, h.quality, h.costs, h.vrooms, h.coste, h.vroome, h.costp, h.vroomp from hotel h, users u where h.hownerid = ? and h.hid = ?;");
-		    preStatement.setInt(1, User.userid);
+		    preStatement.setInt(1, User.getUserid());
 		    preStatement.setInt(2, hid);
 		    ResultSet rs = preStatement.executeQuery();
 		    while(rs.next()){

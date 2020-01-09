@@ -24,7 +24,7 @@ public class RegisteredUserBean {
 		        		"	        FROM registereduser r, users u\r\n" +
 		      		    "	        WHERE u.email=? AND u.userid = r.rid ");
  
-          preStatement.setString(1, User.email); 
+          preStatement.setString(1, User.getEmail()); 
           ResultSet rs = preStatement.executeQuery();
 		    
 		    
@@ -46,7 +46,7 @@ public void SendDeleteRequest() {
 	     
 	      String query = "UPDATE `hotelreservation`.`registereduser` SET `issendrequest` = '1' WHERE (`rid` = ?);";
 	      PreparedStatement preparedStmt = getConnectionDB().prepareStatement(query);
-	      preparedStmt.setInt  (1, User.userid);
+	      preparedStmt.setInt  (1, User.getUserid());
 	    
 	      preparedStmt.executeUpdate();
 	      addMessage("Send Request","a request to admin to delete your account sent");  

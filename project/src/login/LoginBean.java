@@ -38,11 +38,7 @@ public class LoginBean {
 
 		try {
 		
-<<<<<<< HEAD
 			 PreparedStatement preStatement = getConnectionDB().prepareStatement("SELECT u.userid, u.email, u.passw, u.typee, u.isdeleted\r\n" + 
-=======
-			 PreparedStatement preStatement = getConnectionDB().prepareStatement("SELECT u.userid, u.email, u.passw,u.typee,u.isdeleted\r\n" + 
->>>>>>> master
 			 		"FROM users u\r\n" + 
 			 		"	WHERE u.email= ? AND u.passw = MD5(?) AND u.isdeleted=0");
 
@@ -54,7 +50,6 @@ public class LoginBean {
 		    	User.setUserid(Integer.parseInt(rs.getString(1)));
 		    	User.setEmail(rs.getString(2));
 		    	User.setTypee(rs.getString(4));
-<<<<<<< HEAD
 		   
 		    }
      	String typee=User.getTypee();
@@ -83,9 +78,6 @@ public class LoginBean {
  			User.setName(User.getEmail());
  		
  		}
-=======
-		    }
->>>>>>> master
 		    
 		} catch (Exception e) {
 			System.out.println("buraya geldim");

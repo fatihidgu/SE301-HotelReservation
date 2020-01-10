@@ -5,7 +5,6 @@ public abstract class User {
 	private static String email; //= "furki@gmail.com";
 	private static String typee;
 	private static int balance;
-<<<<<<< HEAD
 	private static String name;
 	
 	public static void setName(String name) {
@@ -14,9 +13,6 @@ public abstract class User {
 	public static String getName() {
 		return name;
 	}
-=======
-	
->>>>>>> master
 	 public static int getUserid() {
 		return userid;
 	}

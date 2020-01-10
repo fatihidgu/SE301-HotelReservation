@@ -163,6 +163,7 @@ public class VisitorPageBean {
 		ReservationInfo.setHotelName(hotelName);
 	}
 	
+<<<<<<< HEAD
 	public String getUserna() {
 		return userna;
 	}
@@ -170,5 +171,7 @@ public class VisitorPageBean {
 		this.userna = userna;
 	}
 	
+=======
+>>>>>>> master
 
 }

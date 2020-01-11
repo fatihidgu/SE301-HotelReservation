@@ -14,15 +14,15 @@
 		style="margin-top: 2%; border: 1px solid black; height: 120px; width: 100%; background-color: #8FBC8F">
 		<div style="float: left; margin-top: 0.8%; margin-left: 1%">
 			<h:commandLink id="ho-logo-id" action="registerUser.xhtml">
-				<h:graphicImage
-					url="resources\images\logo.png"
+				<h:graphicImage url="/resources\images\logo.png"
 					style="width: 100px; height: 100px;"></h:graphicImage>
 			</h:commandLink>
 		</div>
-				<h3 style="margin-bottom: 0px; font-size: 32px;">Welcome to tatiloradaburada.com</h3>
-<div style="margin-left: 82%; ">
+		<h3 style="margin-bottom: 0px; font-size: 32px;">Welcome to
+			tatiloradaburada.com</h3>
+		<div style="margin-left: 82%;">
 			<h:commandLink id="ho-name-id" action="registerUser.xhtml">
-				<h:outputText value="#{VisitorPageBean.userna}" ></h:outputText>
+				<h:outputText value="#{VisitorPageBean.userna}"></h:outputText>
 			</h:commandLink>
 			<h:commandButton value="LOGOUT" style="margin-left:3%; height: 25px"
 				type="submit" action="VisitorPage1.xhtml"
@@ -89,8 +89,8 @@
 	<br />
 
 
-	<h:commandButton value="PAY"
-		style="float: right; height: 25px; margin-top: 2%; margin-right: 8%"
+	<h:commandButton value="Make Reservation"
+		style=" height: 25px; margin-top: 2%; margin-left : 13%"
 		actionListener="#{MakeResBean.takeReservationInfo(MakeResBean.numberofroom,MakeResBean.roomtype,MakeResBean.startdate,MakeResBean.enddate)}"
 		action="pay.xhtml" />
 

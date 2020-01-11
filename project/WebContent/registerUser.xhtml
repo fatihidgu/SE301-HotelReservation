@@ -16,10 +16,10 @@
 <h:graphicImage url="/resources\images\logo.png" style="width: 100px; height: 100px;"></h:graphicImage>
 </h:commandLink>
 </div>
-		<h3 style="margin-bottom: 0px; font-size: 32px;">Welcome to tatiloradaburada.com</h3>
+		<h3 style="margin-bottom: 0px; font-size: 32px;">tatiloradaburada.com</h3>
 <div style="margin-left: 82%; ">
 <h:commandLink id="ho-name-id" action="registerUser.xhtml" >
-<h:outputText value="MY ACCOUNT"></h:outputText>
+<h:outputText value="#{VisitorPageBean.userna}" ></h:outputText>
 </h:commandLink>
 <h:commandButton value="LOGOUT" style="margin-left:3%; height: 25px" type="submit" action="VisitorPage1.xhtml" actionListener="#{LoginBean.logout}"/>
 </div>
@@ -128,6 +128,11 @@
     			<p:column headerText="Cost">
         			<h:outputText value="#{pastreservationss.cost}" />
     			</p:column>
+    			
+    			<p:column headerText="">
+    			<p:commandButton value="comment" actionListener="#{commentBean.takeHotelId(pastreservationss.hotelid,pastreservationss.hotelname)}" action="makecomment.xhtml">
+</p:commandButton>
+    		</p:column>	
 				</p:dataTable>
             </h:panelGrid>
              </p:tab>

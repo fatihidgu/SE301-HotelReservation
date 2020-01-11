@@ -80,8 +80,7 @@ public class LoginBean {
  		}
 		    
 		} catch (Exception e) {
-			System.out.println("buraya geldim");
-			System.out.println(e);
+		System.out.println("kiþi yok");
 		
 		}
 	}
@@ -90,9 +89,13 @@ public class LoginBean {
 		if(User.getUserid()==-1) {
 			return "";
 		}
-	
+	    
+		
 		String typee=User.getTypee();
-		System.out.println("type:"+typee);
+	
+			
+			try {
+					System.out.println("type:"+typee);
 		if(typee.equals("r")) {
 			return "VisitorPage.xhtml";
 		}else if(typee.equals("h")){
@@ -102,6 +105,15 @@ public class LoginBean {
 		}else {
 			return "VisitorPage1.xhtml";
 		}
+			}catch(Exception e) {
+				System.out.println("yok yada sifreyanlýþ");
+				logout();
+			
+			return "";
+				
+			}
+		
+	
 		
 	}
 	

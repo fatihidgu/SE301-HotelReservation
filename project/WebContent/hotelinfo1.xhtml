@@ -8,20 +8,23 @@
 	xmlns:p="http://primefaces.org/ui">
  
     <h:body>
-    <h:form id="header" style="margin-top: 2%; border: 1px solid black; height: 120px; width: 100%; background-color: #8FBC8F">
-<div style="float: left; margin-top: 0.8%; margin-left: 1%">
-<h:commandLink id="ho-logo-id"  action="VisitorPage.xhtml">
-<h:graphicImage url="/resources\images\logo.png" style="width: 100px; height: 100px;"></h:graphicImage>
-</h:commandLink>
-</div>
-		<h3 style="margin-bottom: 0px; font-size: 32px;">tatiloradaburada.com</h3>
+    	<h:form id="header"
+		style="margin-top: 2%; border: 1px solid black; height: 120px; width: 100%; background-color: #8FBC8F">
+		<div style="float: left; margin-top: 0.8%; margin-left: 1%">
+			<h:commandLink id="ho-logo-id" action="VisitorPage1.xhtml">
+				<h:graphicImage url="/resources\images\logo.png"
+					style="width: 100px; height: 100px;"></h:graphicImage>
+			</h:commandLink>
+		</div>
+				<h3 style="margin-bottom: 0px; font-size: 32px;">tatiloradaburada.com    Hotel Information</h3>
 <div style="margin-left: 82%; ">
 <h:commandLink id="ho-name-id" action="registerUser.xhtml" >
 <h:outputText value="#{VisitorPageBean.userna}" ></h:outputText>
 </h:commandLink>
 <h:commandButton value="LOGOUT" style="margin-left:3%; height: 25px" type="submit" action="VisitorPage1.xhtml" actionListener="#{LoginBean.logout}"/>
-</div>
-</h:form>
+
+		</div>
+	</h:form>
             <p:tab title="My Hotels">
             <h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Name " />
         			<h:outputText value="#{commentBean.hotelname}" />
@@ -60,16 +63,6 @@
             </h:panelGrid>
         </p:tab>
     
-	  <h:form>
-		<table>
-    		<tr>
-    		  <td valign="top">Write your Comment :</td>
-    		  <td><h:inputTextarea value="#{commentBean.text}" cols="50" rows="15" update="Refresh" /></td>
-    		</tr> 
-    		</table>
-    		<h:commandButton value="Submit" actionListener="#{commentBean.writecomment}" />
-    		<h:commandButton value="Main Page" action="VisitorPage" />
-    	  </h:form>
  
 </h:body>
 </html>

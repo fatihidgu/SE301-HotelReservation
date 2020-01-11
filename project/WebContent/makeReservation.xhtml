@@ -21,7 +21,7 @@
 		<h3 style="margin-bottom: 0px; font-size: 32px;">Welcome to
 			tatiloradaburada.com</h3>
 		<div style="margin-left: 82%;">
-			<h:commandLink id="ho-name-id" action="registerUser.xhtml">
+			<h:commandLink id="ho-name-id" action="VisitorPage.xhtml">
 				<h:outputText value="#{VisitorPageBean.userna}"></h:outputText>
 			</h:commandLink>
 			<h:commandButton value="LOGOUT" style="margin-left:3%; height: 25px"
@@ -53,7 +53,7 @@
 				<h:outputText value="Ending Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" style="font-size: 14pt"></h:outputText>
 			</div>
 			<div style="float: left">
-				<p:calendar id="endDate" value="#{MakeResBean.enddate}" actionListener="#{MakeResBean.onDateChange}"
+				<p:calendar id="endDate" value="#{MakeResBean.enddate}" 
 					pattern="yyyy-MM-dd" mindate="#{MakeResBean.startdate}">
 					<p:ajax event="dateSelect" update="startDate" />
 				</p:calendar>

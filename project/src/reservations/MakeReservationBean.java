@@ -21,7 +21,7 @@ import user.User;
 public class MakeReservationBean {
 
 	private static final long serialVersionUID = 1L;
-	private final Map<String, Map<Integer, Integer>> data = new HashMap<>();
+	private Map<String, Map<Integer, Integer>> data = new HashMap<>();
 	private Map<String, String> roommap;
 	private Map<Integer, Integer> numbermap;
 
@@ -41,7 +41,6 @@ public class MakeReservationBean {
 			setHotelid(ReservationInfo.getHotelId());
 			setHotelname(ReservationInfo.getHotelName());
 			getBalaanceDB();
-			//roomTypeNo();
 
 		} catch (Exception e) {
 
@@ -158,9 +157,10 @@ public class MakeReservationBean {
 
 		String startD = res.getStartdate().getYear() + 1900 + "." + (res.getStartdate().getMonth() + 1) + "."
 				+ res.getStartdate().getDate();
-		String endD = res.getStartdate().getYear() + 1900 + "." + (res.getStartdate().getMonth() + 1) + "."
-				+ res.getStartdate().getDate();
-
+		String endD = res.getEnddate().getYear() + 1900 + "." + (res.getEnddate().getMonth() + 1) + "."
+				+ res.getEnddate().getDate();
+		
+	
 		// reservation ý database e at
 		try {
 			String query = "INSERT INTO `hotelreservation`.`reservation` (`id`, `userid`, `hotelid`, `iscancelld`, `startdate`, `enddate`, `numberofroom`, `roomtype`, `cost`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);\r\n"
@@ -186,7 +186,7 @@ public class MakeReservationBean {
 		reset();
 
 	}
-	
+
 	private void reset() {
 		ReservationInfo.setHotelName("");
 		ReservationInfo.setStart(new Date());
@@ -211,7 +211,7 @@ public class MakeReservationBean {
 				preparedStmt.setInt(2, User.getUserid());
 				preparedStmt.executeUpdate();
 				createReservation();
-				changeRoomNumber();
+				// changeRoomNumber();
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -224,94 +224,20 @@ public class MakeReservationBean {
 		}
 	}
 
-	public void changeRoomNumber() {
-
-		try {
-			int availableRoomNo = 0;
-
-			// ayýrttýðýn odanýn uygun olanlarýnýn sayýsýný bul
-			if (roomtype.equals("standart")) {
-				PreparedStatement preStatement = getConnectionDB()
-						.prepareStatement(" SELECT h.vrooms  \r\n" + "FROM hotel h\r\n" + "WHERE h.hid= ?   ");
-
-				preStatement.setInt(1, ReservationInfo.getHotelId());
-				ResultSet rs = preStatement.executeQuery();
-				while (rs.next()) {
-					availableRoomNo = rs.getInt(1);
-				}
-			}
-
-			else if (roomtype.equals("executive")) {
-				PreparedStatement preStatement = getConnectionDB()
-						.prepareStatement(" SELECT h.vroome  \r\n" + "FROM hotel h\r\n" + "WHERE h.hid= ?   ");
-
-				preStatement.setInt(1, ReservationInfo.getHotelId());
-				ResultSet rs = preStatement.executeQuery();
-				while (rs.next()) {
-					availableRoomNo = rs.getInt(1);
-				}
-			}
-
-			else if (roomtype.equals("presidential")) {
-				PreparedStatement preStatement = getConnectionDB()
-						.prepareStatement(" SELECT h.vroomp  \r\n" + "FROM hotel h\r\n" + "WHERE h.hid= ?   ");
-
-				preStatement.setInt(1, ReservationInfo.getHotelId());
-				ResultSet rs = preStatement.executeQuery();
-				while (rs.next()) {
-					availableRoomNo = rs.getInt(1);
-				}
-			}
-
-			availableRoomNo = availableRoomNo - ReservationInfo.getNoRoom();
-
-			// kalan oda sayýsý update
-			String roomt = "";
-			if (ReservationInfo.getRoomType().equals("standart"))
-
-			{
-				String query = "UPDATE `hotelreservation`.`hotel` SET `vrooms` = ? WHERE (`hid` = ?);";
-				PreparedStatement preparedStmt = getConnectionDB().prepareStatement(query);
-				preparedStmt.setInt(1, availableRoomNo);
-				preparedStmt.setInt(2, hotelid);
-				preparedStmt.executeUpdate();
-			}
-
-			else if (ReservationInfo.getRoomType().equals("executive"))
-
-			{
-				String query = "UPDATE `hotelreservation`.`hotel` SET `vroome` = ? WHERE (`hid` = ?);";
-				PreparedStatement preparedStmt = getConnectionDB().prepareStatement(query);
-				preparedStmt.setInt(1, availableRoomNo);
-				preparedStmt.setInt(2, hotelid);
-				preparedStmt.executeUpdate();
-			}
-
-			else if (ReservationInfo.getRoomType().equals("presidential"))
-
-			{
-				String query = "UPDATE `hotelreservation`.`hotel` SET `vroomp` = ? WHERE (`hid` = ?);";
-				PreparedStatement preparedStmt = getConnectionDB().prepareStatement(query);
-				preparedStmt.setInt(1, availableRoomNo);
-				preparedStmt.setInt(2, hotelid);
-				preparedStmt.executeUpdate();
-			}
-
-			getConnectionDB().close();
-
-		} catch (Exception e) {
-		}
-
-	}
 
 	//////////////////////////////////////////////////////////////////////////
-	
 
 	public void onDateChange() {
-	roomTypeNo();
-	System.out.println("on date changý no");
-	}
+		data.clear();
+		// private Map<String, String> roommap;
+		// private Map<Integer, Integer> numbermap;
+		ReservationInfo.setStart(startdate);
+		ReservationInfo.setEnd(enddate);
 	
+		roomTypeNo();
+		onChange();
+	}
+
 	public void onChange() {
 		if (roomtype != null && !roomtype.equals(""))
 			setNumbermap(data.get(roomtype));
@@ -320,50 +246,103 @@ public class MakeReservationBean {
 	}
 
 	public void roomTypeNo() {
-		System.out.println("roomtyoeno()");
+
+		String startD = ReservationInfo.getStart().getYear() + 1900 + "." + (ReservationInfo.getStart().getMonth() + 1)
+				+ "." + ReservationInfo.getStart().getDate();
+		String endD = ReservationInfo.getEnd().getYear() + 1900 + "." + (ReservationInfo.getEnd().getMonth() + 1) + "."
+				+ ReservationInfo.getEnd().getDate();
 
 		roommap = new HashMap<>();
 
 		Map<Integer, Integer> map = new HashMap<>();
 
+		/////// STANDART
 		try {
+			// rezervasyonlu oda sayýsý
+			int reservedRoomsS = 0;
+			PreparedStatement sroomRes = getConnectionDB().prepareStatement(
+					"SELECT numberofroom FROM reservation WHERE (`hotelid` = ?) and enddate <= ? and startdate >= ? and iscancelld = '0' and roomtype = 's';");
+			sroomRes.setInt(1, this.hotelid);
+			sroomRes.setString(3, startD);
+			sroomRes.setString(2, endD);
+			ResultSet b = sroomRes.executeQuery();
+			while (b.next()) {
+				reservedRoomsS += b.getInt(1);
+			}
+
+			// genel oda sayýsý
+			int SnoRooms = 0;
+			int Savailable = 0;
 			PreparedStatement sroom = getConnectionDB()
 					.prepareStatement(" SELECT vrooms FROM hotelreservation.hotel\r\n" + "WHERE (`hid` = ?);");
 			sroom.setInt(1, this.hotelid);
 			ResultSet rs = sroom.executeQuery();
 
 			while (rs.next()) {
-
-				int x = rs.getInt(1);
-				if (x != 0) {
-					roommap.put("standart", "standart");
-					for (int i = 1; i <= x; i++) {
-						map.put(i, i);
-					}
-				}
-				data.put("standart", map);
+				SnoRooms = rs.getInt(1);
 			}
+			Savailable = SnoRooms - reservedRoomsS;
+
+			if (Savailable != 0) {
+				roommap.put("standart", "standart");
+				for (int i = 1; i <= Savailable; i++) {
+					map.put(i, i);
+				}
+			}
+			data.put("standart", map);
 			getConnectionDB().close();
-			////////
+
+			/////////// EXECUTIVE
+			// rezervasyonlu oda sayýsý
+			int reservedRooms = 0;
+			PreparedStatement eroomRes = getConnectionDB().prepareStatement(
+					"SELECT numberofroom FROM reservation WHERE (`hotelid` = ?) and enddate <= ? and startdate >= ? and iscancelld = '0' and roomtype = 'e';");
+			eroomRes.setInt(1, this.hotelid);
+			eroomRes.setString(3, startD);
+			eroomRes.setString(2, endD);
+			ResultSet a = eroomRes.executeQuery();
+			while (a.next()) {
+				reservedRooms += a.getInt(1);
+			}
+			
+			// genel oda sayýsý
+			int noRooms = 0;
+			int available = 0;
 			PreparedStatement eroom = getConnectionDB()
 					.prepareStatement(" SELECT vroome FROM hotelreservation.hotel\r\n" + "WHERE (`hid` = ?);");
 			eroom.setInt(1, this.hotelid);
 			ResultSet rs1 = eroom.executeQuery();
 			map = new HashMap<>();
 			while (rs1.next()) {
-
-				int x1 = rs1.getInt(1);
-				if (x1 != 0) {
-					roommap.put("executive", "executive");
-					for (int i = 1; i <= x1; i++) {
-						map.put(i, i);
-					}
-				}
-				data.put("executive", map);
+				noRooms = rs1.getInt(1);
 			}
+			available = noRooms - reservedRooms;
+
+			if (available != 0) {
+				roommap.put("executive", "executive");
+				for (int i = 1; i <= available; i++) {
+					map.put(i, i);
+				}
+			}
+			data.put("executive", map);
 			getConnectionDB().close();
 
-			//////
+			///////////PRESIDENTAL
+			// rezervasyonlu oda sayýsý
+						int PreservedRooms = 0;
+						PreparedStatement ProomRes = getConnectionDB().prepareStatement(
+								"SELECT numberofroom FROM reservation WHERE (`hotelid` = ?) and enddate <= ? and startdate >= ? and iscancelld = '0' and roomtype = 'p';");
+						ProomRes.setInt(1, this.hotelid);
+						ProomRes.setString(3, startD);
+						ProomRes.setString(2, endD);
+						ResultSet c = ProomRes.executeQuery();
+						while (c.next()) {
+							PreservedRooms += c.getInt(1);
+						}
+			
+			//genel oda sayýsý
+			int PnoRooms = 0;
+			int Pavailable = 0;
 			PreparedStatement proom = getConnectionDB()
 					.prepareStatement(" SELECT vroomp FROM hotelreservation.hotel\r\n" + "WHERE (`hid` = ?);");
 			proom.setInt(1, this.hotelid);
@@ -371,17 +350,21 @@ public class MakeReservationBean {
 
 			map = new HashMap<>();
 			while (rs2.next()) {
-				int x2 = rs2.getInt(1);
-				if (x2 != 0) {
+				PnoRooms = rs2.getInt(1);
+				
+				getConnectionDB().close();
+			}
+			
+			Pavailable = PnoRooms - PreservedRooms;
+			
+			if (Pavailable != 0) {
 					roommap.put("presidential", "presidential");
 
-					for (int i = 1; i <= x2; i++) {
+					for (int i = 1; i <= Pavailable; i++) {
 						map.put(i, i);
 					}
 				}
 				data.put("presidential", map);
-				getConnectionDB().close();
-			}
 
 		} catch (Exception ex) {
 

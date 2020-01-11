@@ -47,6 +47,17 @@ private int cost;
 		this.cost = cost;
 	}
 	
+	public Reservation( String Hotelname,Date startdate, Date enddate,int numberofroom, String roomtype,int id,int cost,int hotelId) {
+		
+	    this.hotelname=Hotelname;
+		this.startdate =startdate;
+		this.enddate =enddate ;
+		this.numberofroom =numberofroom ;
+		this.roomtype=roomtype;
+		this.id=id;
+		this.cost = cost;
+		this.hotelid = hotelId;
+	}
 	
 	public int getId() {
 		return id;

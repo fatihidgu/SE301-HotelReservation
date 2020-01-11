@@ -41,7 +41,7 @@ public class MakeReservationBean {
 			setHotelid(ReservationInfo.getHotelId());
 			setHotelname(ReservationInfo.getHotelName());
 			getBalaanceDB();
-			roomTypeNo();
+			//roomTypeNo();
 
 		} catch (Exception e) {
 
@@ -183,13 +183,17 @@ public class MakeReservationBean {
 		} catch (Exception ex) {
 		}
 
+		reset();
+
+	}
+	
+	private void reset() {
 		ReservationInfo.setHotelName("");
 		ReservationInfo.setStart(new Date());
 		ReservationInfo.setEnd(new Date());
 		ReservationInfo.setNoRoom(0);
 		ReservationInfo.setRoomType("");
 		ReservationInfo.setCost(0);
-
 	}
 
 	public void payment() {
@@ -213,6 +217,7 @@ public class MakeReservationBean {
 				e.printStackTrace();
 			}
 		} else {
+			reset();
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.addMessage(null, new FacesMessage("Reservation failed: insufficient balance"));
 
@@ -300,7 +305,13 @@ public class MakeReservationBean {
 	}
 
 	//////////////////////////////////////////////////////////////////////////
+	
 
+	public void onDateChange() {
+	roomTypeNo();
+	System.out.println("on date changý no");
+	}
+	
 	public void onChange() {
 		if (roomtype != null && !roomtype.equals(""))
 			setNumbermap(data.get(roomtype));
@@ -309,6 +320,7 @@ public class MakeReservationBean {
 	}
 
 	public void roomTypeNo() {
+		System.out.println("roomtyoeno()");
 
 		roommap = new HashMap<>();
 

@@ -24,7 +24,7 @@ public class PastReservationBean {
 		    String Today = d.getYear()+1900+"."+(d.getMonth()+1)+"."+d.getDate();
 		   
 		   
-		    PreparedStatement preStatement = connection.prepareStatement(" SELECT h.namee ,res.startdate,res.enddate,res.numberofroom,res.roomtype,res.id ,res.cost     \r\n" + 
+		    PreparedStatement preStatement = connection.prepareStatement(" SELECT h.namee ,res.startdate,res.enddate,res.numberofroom,res.roomtype,res.id ,res.cost ,res.hotelid    \r\n" + 
 	                "FROM registereduser r ,reservation res,hotel h,users u\r\n" + 
 	                "WHERE u.email=? and u.userid = r.rid and res.userid=r.rid and res.hotelid=h.hid and res.enddate <= ?  and res.iscancelld ='0'");
 
@@ -35,7 +35,7 @@ public class PastReservationBean {
 		   
 		     while(rs.next()){ 
 		
-		    	 pastreservationss.add(new Reservation(rs.getString(1), rs.getDate(2), rs.getDate(3), rs.getInt(4), rs.getString(5),rs.getInt(6),rs.getInt(7)));
+		    	 pastreservationss.add(new Reservation(rs.getString(1), rs.getDate(2), rs.getDate(3), rs.getInt(4), rs.getString(5),rs.getInt(6),rs.getInt(7),rs.getInt(8)));
 	        }
 		} catch (Exception e) {
 		

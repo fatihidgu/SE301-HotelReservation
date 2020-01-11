@@ -37,9 +37,9 @@
 	<div style="width: 40%; margin-left: 13%; margin-top: 3%">
 		<div style="margin-top: 3%">
 			<div style="float: left">
-				<h:outputText value="Beginning Date " style="font-size: 14pt"></h:outputText>
+				<h:outputText value="Beginning Date &nbsp;" style="font-size: 14pt"></h:outputText>
 			</div>
-			<div style="float: right">
+			<div style="float: left">
 				<p:calendar id="startDate" value="#{MakeResBean.startdate}"
 					pattern="yyyy-MM-dd" mindate="today"
 					maxdate="#{MakeResBean.enddate}">
@@ -50,14 +50,21 @@
 		<br />
 		<div style="margin-top: 5%">
 			<div style="float: left">
-				<h:outputText value="Ending Date " style="font-size: 14pt"></h:outputText>
+				<h:outputText value="Ending Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" style="font-size: 14pt"></h:outputText>
 			</div>
-			<div style="float: right">
-				<p:calendar id="endDate" value="#{MakeResBean.enddate}"
+			<div style="float: left">
+				<p:calendar id="endDate" value="#{MakeResBean.enddate}" actionListener="#{MakeResBean.onDateChange}"
 					pattern="yyyy-MM-dd" mindate="#{MakeResBean.startdate}">
 					<p:ajax event="dateSelect" update="startDate" />
 				</p:calendar>
 			</div>
+			
+			
+			<h:commandButton value="set Date"
+		style=" height: 25px; margin-top: 2%; margin-left : 65%"
+		actionListener="#{MakeResBean.onDateChange}" />
+		
+		<p:separator />
 		</div>
 		<br />
 

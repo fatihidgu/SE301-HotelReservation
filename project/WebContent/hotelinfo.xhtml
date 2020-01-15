@@ -26,38 +26,38 @@
 		</div>
 	</h:form>
             <p:tab title="My Hotels">
-            <h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Name " />
-        			<h:outputText value="#{commentBean.hotelname}" />
+            <h:outputText style=" font-size: 20px; text-align:center; font-weight:bold" value="Name " />
+        			<h:outputText  style=" font-size: 20px;" value="#{commentBean.hotelname}" />
         			<br/>
-        			<h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Location " />
+        			<h:outputText style="font-size: 20px; text-align:center; font-weight:bold" value="Location " />
         			<h:outputText value="#{commentBean.location}" />
         			<br/>
-        			<h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Quality " />
-        			<h:outputText value="#{commentBean.quality}" />
+        			<h:outputText style="font-size: 20px; text-align:center; font-weight:bold" value="Quality " />
+        			<h:outputText  style=" font-size: 20px;" value="#{commentBean.quality}" />
         			<br/><br/>
-        			<h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Cost for standart room " />
-        			<h:outputText value="#{commentBean.costs}" />
+        			<h:outputText style="font-size: 20px; text-align:center; font-weight:bold" value="Cost for standart room " />
+        			<h:outputText style=" font-size: 20px;" value="#{commentBean.costs}" />
         			<br/>
-        			<h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Vacant room for standart room " />
-        			<h:outputText value="#{commentBean.vrooms}" />
+        			<h:outputText style="font-size: 20px; text-align:center; font-weight:bold" value="Vacant room for standart room " />
+        			<h:outputText style=" font-size: 20px;"  value="#{commentBean.vrooms}" />
         			<br/><br/>
-        			<h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Cost for executive room " />
-        			<h:outputText value="#{commentBean.coste}" />
+        			<h:outputText style="font-size: 20px; text-align:center; font-weight:bold" value="Cost for executive room " />
+        			<h:outputText style=" font-size: 20px;" value="#{commentBean.coste}" />
         			<br/>
-        			<h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Vacant room for executive	 room  " />
-        			<h:outputText value="#{commentBean.vroome}" />
+        			<h:outputText style="font-size: 20px; text-align:center; font-weight:bold" value="Vacant room for executive	 room  " />
+        			<h:outputText  style=" font-size: 20px;" value="#{commentBean.vroome}" />
         			<br/><br/>
-        			<h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Cost for presidential room  " />
-        			<h:outputText value="#{commentBean.costp}" />
+        			<h:outputText style="font-size: 20px; text-align:center; font-weight:bold" value="Cost for presidential room  " />
+        			<h:outputText  style=" font-size: 20px;" value="#{commentBean.costp}" />
         			<br/>
-        				<h:outputText style="font-size:85%; text-align:center; font-weight:bold" value="Vacant room for presidential room  " />
+        				<h:outputText style="font-size: 20px; text-align:center; font-weight:bold" value="Vacant room for presidential room  " />
         			<h:outputText value="#{commentBean.vroomp}" />
     			
             <h:panelGrid columns="2" cellpadding="10">
             		<p:dataTable var="commentt" value="#{commentBean.commentt}">
     			
-    			<p:column style="font-size:85%; text-align:center;" headerText="Comments">
-        			<br/><h:outputText value="#{commentt.text}" /><br/>
+    			<p:column style="font-size: 20px; text-align:center;" headerText="Comments">
+        			<br/><h:outputText style=" font-size: 20px;" value="#{commentt.text}" /><br/>
     			</p:column>			
 			</p:dataTable>
             </h:panelGrid>

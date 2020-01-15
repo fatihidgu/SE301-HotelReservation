@@ -77,7 +77,7 @@ public class LoginBean {
 			}
 
 		} catch (Exception e) {
-			System.out.println("kiþi yok");
+			
 
 		}
 	}
@@ -103,9 +103,9 @@ public class LoginBean {
 				return "VisitorPage1.xhtml";
 			}
 		} catch (Exception e) {
-			System.out.println("yok yada sifreyanlýþ");
+			
 			logout();
-
+			
 			return "";
 
 		}
@@ -136,8 +136,6 @@ public class LoginBean {
 		User.setUserid(-1);
 		User.setEmail("");
 		User.setTypee("");
-		System.out.println("logout sonrasý "+User.getEmail());
-
 	}
 
 	public void setPassword(String password) {

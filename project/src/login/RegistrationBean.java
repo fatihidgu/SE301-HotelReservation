@@ -12,19 +12,19 @@ import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 import registeredUser.RegisteredUser;
 import user.User;
 
 @ManagedBean(name = "RegistrationBean")
-@RequestScoped
+@ViewScoped
 public class RegistrationBean {
 	private String name;
 	private String lastName;
 	private String email;
 	private String password;
-	private int pnumber;
-	private String p1;
+	private String pnumber;
 	private Date birthDate;
 	private String gender;
 	private String typee;
@@ -39,14 +39,9 @@ public class RegistrationBean {
 		this.typee = typee;
 	}
 
-	
-
-
-
 	public RegistrationBean() {
 
 	}
-
 
 	public void insertR() {
 		this.setTypee("r");
@@ -116,15 +111,18 @@ public class RegistrationBean {
 				preparedStmt4.setInt(1, userid);
 				preparedStmt4.setString(2, name);
 				preparedStmt4.setString(3, lastName);
-				preparedStmt4.setInt(4, pnumber);
+				preparedStmt4.setInt(4, Integer.parseInt(pnumber));
+				System.out.println(pnumber);
 				preparedStmt4.setString(5, gender);
 				preparedStmt4.setString(6, bday);
 				preparedStmt4.setInt(7, 500);
 				preparedStmt4.setString(8, "0");
+				System.out.println("executeden öncesiii");
 				preparedStmt4.executeUpdate();
-				
-			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-			
+				System.out.println("executeee ????");
+			} catch (Exception e) {
+			System.out.println("exception1");
+			System.out.println(e.toString());
 			}
 			}else if(typee=="h") {
 				try {
@@ -135,7 +133,7 @@ public class RegistrationBean {
 					preparedStmt4.setInt(1, userid);
 					preparedStmt4.setString(2, name);
 					preparedStmt4.setString(3, lastName);
-					preparedStmt4.setInt(4, pnumber);
+					preparedStmt4.setInt(4, Integer.parseInt(pnumber));
 					preparedStmt4.setString(5, gender);
 					preparedStmt4.setString(6, bday);
 					preparedStmt4.setString(7, "0");
@@ -193,11 +191,11 @@ public class RegistrationBean {
 		this.email = email;
 	}
 
-	public int getPnumber() {
+	public String getPnumber() {
 		return pnumber;
 	}
 
-	public void setPnumber(int pnumber) {
+	public void setPnumber(String pnumber) {
 		this.pnumber = pnumber;
 	}
 
@@ -216,10 +214,5 @@ public class RegistrationBean {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-public String getP1() {
-	return p1;
-}
-public void setP1(String p1) {
-	this.p1 = p1;
-}
+
 }

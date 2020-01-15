@@ -90,15 +90,12 @@
 				<h:outputText value="*Phone number: " style="font-size: 14pt"></h:outputText>
 			</div>
 			<div style="float: right">
-				<p:inputText id="pnum" value="#{RegistrationBean.p1}"
-					required="true" validatorMessage="Invalid phone format">
-					  	<f:validateRegex
-						pattern="(\\d{3})(\\d{3})(\\d{4})" />
-					
+				<p:inputText id="pnum" value="#{RegistrationBean.pnumber}"
+					required="true" >
+					  <f:validator validatorId="phoneValidator" />
 				</p:inputText>
-				  
-				<p:watermark for="pnum" value="(_ _ _ _ _ _ _ _ _)" />
-				<p:message for="pnum" />
+				<p:watermark for="pnum" value="(_ _ _ _ _ _ _)" />
+				 <h:message for = "pnum" style = "color:red" />
 			</div>
 		</div>
 		<br />
@@ -131,7 +128,7 @@
 	</div>
 
 	<br />
-	<h:commandButton value="SAVE"
+	<h:commandButton value="Register"
 		style="float: right; height: 25px; margin-top: 2%; margin-right: 8%"
 		type="submit" actionListener="#{RegistrationBean.insertR()}"
 		action="login.xhtml" />

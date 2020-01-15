@@ -89,9 +89,12 @@
 				<h:outputText value="*Phone number: " style="font-size: 14pt" ></h:outputText>
 			</div>
 			<div style="float: right">
-				<p:inputText value="#{RegistrationBean.pnumber}" required="true">
-					<f:convertNumber />
+				<p:inputText id="pnum" value="#{RegistrationBean.pnumber}"
+					required="true" >
+					  <f:validator validatorId="phoneValidator" />
 				</p:inputText>
+				<p:watermark for="pnum" value="(_ _ _ _ _ _ _)" />
+				 <h:message for = "pnum" style = "color:red" />
 			</div>
 		</div>
 		<br />

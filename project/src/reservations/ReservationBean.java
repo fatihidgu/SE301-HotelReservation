@@ -89,7 +89,7 @@ public class ReservationBean {
 		      
               preparedStmt2.executeUpdate();
               getConnectionDB().close();
-              changeRoomNumber(id);
+             // changeRoomNumber(id);
 		
 		  }catch(Exception  ex) {}
 	

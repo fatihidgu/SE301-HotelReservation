@@ -8,10 +8,12 @@ import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+
 import user.User;
 
 @ManagedBean (name="editHoInfoBean")
-@RequestScoped
+@ViewScoped
 public class editHoInfoBean {
 	private String name;
 	private String lastName;

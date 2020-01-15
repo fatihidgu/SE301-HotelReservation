@@ -33,11 +33,21 @@
 
 <div style="width: 40%; margin-left: 13%; margin-top: 3%">
     
-	<div style="margin-top: 3%"><div style="float: left"><h:outputText value="Name: " style="font-size: 14pt"></h:outputText></div><div style="float: right"><p:inputText  value="#{editHoInfoBean.name}"   required="true"/></div></div><br/>
-	<div style="margin-top: 5%"><div style="float: left"><h:outputText value="Lastname: " style="font-size: 14pt"></h:outputText></div><div style="float: right"><p:inputText value="#{editHoInfoBean.lastName}" required="true"/>  </div></div><br/>
-	<div style="margin-top: 3%"><div style="float: left"><h:outputText value="Phone number: " style="font-size: 14pt"></h:outputText></div><div style="float: right"><p:inputText value="#{editHoInfoBean.pnumber}" required="true"/></div></div><br/>
-	<div style="margin-top: 5%"><div style="float: left"><h:outputText value="Birthday: " style="font-size: 14pt"></h:outputText></div><div style="float: right"> <p:calendar maxdate="#{EditInBean.getMinAge()}" value="#{editHoInfoBean.birthDate}" pattern="yyyy-MM-dd"/></div></div><br/>
-	<div style="margin-top: 5%"><div style="float: left"><h:outputText value="Gender: " style="font-size: 14pt"></h:outputText></div><div style="float: right"><p:inputText value="#{editHoInfoBean.gender}" required="true"/></div></div><br/>
+	
+	
+	<div style="margin-top: 3%"><div style="float: left"><h:outputText value="Phone number: " style="font-size: 14pt"></h:outputText></div><div style="float: right">
+	<p:inputText id="pnum" value="#{editHoInfoBean.pnumber}" required="true"> 
+	 <f:validator validatorId="phoneValidator" />
+	 	</p:inputText>
+	 	<h:message for = "pnum" style = "color:red" />
+	</div></div><br/>
+			
+					
+					  
+				
+				
+				 
+	
 </div> 
 
 <br/>

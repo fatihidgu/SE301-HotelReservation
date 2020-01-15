@@ -35,7 +35,17 @@
 <div style="width: 40%; margin-left: 13%; margin-top: 3%">
     
 
-	<div style="margin-top: 3%"><div style="float: left"><h:outputText value="Phone number: " style="font-size: 14pt"></h:outputText></div><div style="float: right"><p:inputText value="#{EditInBean.pnumber}" required="true"> <f:convertNumber /></p:inputText>         </div></div><br/>
+	<div style="margin-top: 3%"><div style="float: left"><h:outputText value="Phone number: " style="font-size: 14pt"></h:outputText></div><div style="float: right">
+	<p:inputText id="pnum"  value="#{EditInBean.pnumber}" required="true">
+	<f:validator validatorId="phoneValidator" />
+	</p:inputText>   
+	
+				 <h:message for = "pnum" style = "color:red" />		
+				
+					
+			
+	      
+	</div></div><br/>
 
 	
 </div> 

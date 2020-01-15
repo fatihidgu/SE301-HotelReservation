@@ -117,15 +117,15 @@ public class RegistrationBean {
 				preparedStmt4.setString(6, bday);
 				preparedStmt4.setInt(7, 500);
 				preparedStmt4.setString(8, "0");
-				System.out.println("executeden öncesiii");
 				preparedStmt4.executeUpdate();
-				System.out.println("executeee ????");
+				
 			} catch (Exception e) {
-			System.out.println("exception1");
+	
 			System.out.println(e.toString());
 			}
-			}else if(typee=="h") {
+			}else if(typee.equals("h")) {
 				try {
+					System.out.println("registartion h geldi");
 					String bday = birthDate.getYear() + 1900 + "." + (birthDate.getMonth() + 1) + "." + birthDate.getDate();
 
 					String query4 = "INSERT INTO hotelreservation.hotelowner(hoid,namee,lastname,pnumber,gender,bdate,issendrequest) VALUES (?,?,?,?,?,?,?)";
@@ -140,7 +140,7 @@ public class RegistrationBean {
 					preparedStmt4.executeUpdate();
 					
 				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-				
+				System.out.println(e);
 				}
 			}
 

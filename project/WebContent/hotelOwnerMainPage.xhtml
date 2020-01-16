@@ -70,6 +70,7 @@
         </p:tab>
         
         <p:tab title="My Hotels">
+    
             <h:panelGrid columns="2" cellpadding="10">
             	<p:dataTable var="hoHotels" value="#{hoHotelsBean.hoHotels}">
     			<p:column style="font-size:85%; text-align:center;" headerText="Name">
@@ -101,8 +102,9 @@
     			</p:column>    			
     			<p:column style="width:18%; text-align:center;">
         			<h:commandButton value="EDIT" style="margin-left:3%; height: 23px" type="submit" actionListener="#{hoHotelsEditBean.takeHotelId(hoHotels.id)}" action="editHoHotel.xhtml" />
-        			<h:commandButton value="ACTIVATE" style="margin-left:3%; height: 23px" type="submit" actionListener="#{hoHotelsBean.ActiveHotel(hoHotels.id)}" />
-        			<h:commandButton value="DEACTIVATE" style="margin-left:3%; height: 23px" type="submit" actionListener="#{hoHotelsBean.DeactiveHotel(hoHotels.id)}" />
+        			<p:growl id="message" showDetail="true" />
+                    <h:commandButton value="ACTIVATE" style="margin-left:3%; height: 23px" type="submit" actionListener="#{hoHotelsBean.ActiveHotel(hoHotels.id)}" update="message"/>
+                    <h:commandButton value="DEACTIVATE" style="margin-left:3%; height: 23px" type="submit" actionListener="#{hoHotelsBean.DeactiveHotel(hoHotels.id)}" update="message"/>
         			<h:commandButton value="COMMENTS" style="margin-left:3%; height: 23px" type="submit" actionListener="#{hoHotelsBean.CommentOfHotel(hoHotels.id)}" action="hoComments.xhtml" />
     			</p:column>
 				</p:dataTable>

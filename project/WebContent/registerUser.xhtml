@@ -136,6 +136,18 @@
 				</p:dataTable>
             </h:panelGrid>
              </p:tab>
+             
+             
+              <p:tab title="Messages">
+             <h:panelGrid columns="2" cellpadding="10">
+            	<p:dataTable var="messages" value="#{msgBean.messages}">
+    			<p:column headerText="Message">
+        			<h:outputText value="#{messages.msg}" />
+    			</p:column>
+    			
+				</p:dataTable>
+            </h:panelGrid>
+             </p:tab>
         
         
     </p:tabView>

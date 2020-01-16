@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+
 import user.User;
 
 @ManagedBean (name="hoHotelsAddBean")

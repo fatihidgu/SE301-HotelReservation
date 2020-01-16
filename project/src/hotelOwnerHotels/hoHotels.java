@@ -16,6 +16,7 @@ public class hoHotels {
 	private int oldid;
 	private String hemail;
 	
+	
 	public hoHotels(int id, String name, String location, int quality, int costs, int vrooms, int coste, int vroome, int costp, int vroomp, char isactive, char isaccepted) {
 		this.id = id;
 		this.name = name;

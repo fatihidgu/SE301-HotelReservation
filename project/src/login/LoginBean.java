@@ -50,6 +50,12 @@ public class LoginBean {
 				User.setTypee(rs.getString(4));
 
 			}
+
+            if (rs.first() == false) {
+                addMessage("Login Failure","The username or password is incorrect, please try again!");
+            }
+			
+			
 			String typee = User.getTypee();
 			if (typee.equals("r")) {
 				PreparedStatement preStatement1 = getConnectionDB()
@@ -141,4 +147,9 @@ public class LoginBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public void addMessage(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
 }

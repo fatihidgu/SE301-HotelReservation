@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>EDIT MY INFORMATION</title>
+</h:head>
+<h:body>
+<h:form id="header" style="margin-top: 2%; border: 1px solid black; height: 120px; width: 100%; background-color: #8FBC8F">
+<div style="float: left; margin-top: 0.8%; margin-left: 1%">
+<h:commandLink id="ho-logo-id" action="hotelOwnerMainPage.xhtml" >
+<h:graphicImage url="/resources\images\logo.png" style="width: 100px; height: 100px;"></h:graphicImage>
+</h:commandLink>
+</div>
+		<h3 style="margin-bottom: 0px; font-size: 32px;">Editing information</h3>
+<div style="margin-left: 82%; ">
+<h:commandLink id="ho-name-id" action="hotelOwnerMainPage.xhtml" >
+<h:outputText value="#{VisitorPageBean.userna}" ></h:outputText>
+</h:commandLink>
+<h:commandButton value="LOGOUT" style="margin-left:3%; height: 25px" type="submit" actionListener="#{LoginBean.logout}" action="VisitorPage1.xhtml" />
+</div>
+</h:form>
+</h:body>
+
+
+
+<h:form id="enterInformation" style="margin-top: 2%; border: 1px solid black; width: 100%; height: 600px"  >
+ 
+
+<div style="width: 40%; margin-left: 13%; margin-top: 3%">
+    
+	
+	
+	<div style="margin-top: 3%"><div style="float: left"><h:outputText value="Phone number: " style="font-size: 14pt"></h:outputText></div><div style="float: right">
+	<p:inputText id="pnum" value="#{editHoInfoBean.pnumber}" required="true"> 
+	 <f:validator validatorId="phoneValidator" />
+	 	</p:inputText>
+	 	<h:message for = "pnum" style = "color:red" />
+	</div></div><br/>
+			
+					
+					  
+				
+				
+				 
+	
+</div> 
+
+<br/>
+<h:commandButton value="SAVE" style="float: right; height: 25px; margin-top: 2%; margin-right: 8%" type="submit" actionListener="#{editHoInfoBean.EditInfo()}" action="hotelOwnerMainPage.xhtml" />
+
+</h:form>
+
+
+</html>

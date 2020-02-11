@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Register</title>
+</h:head>
+<h:body>
+	<h:form id="header"
+		style="margin-top: 2%; border: 1px solid black; height: 120px; width: 100%; background-color: #8FBC8F">
+		<div style="float: left; margin-top: 0.8%; margin-left: 1%">
+			<h:commandLink id="ho-logo-id" action="VisitorPage1.xhtml">
+				<h:graphicImage url="/resources\images\logo.png"
+					style="width: 100px; height: 100px;"></h:graphicImage>
+			</h:commandLink>
+		</div>
+				<h3 style="margin-bottom: 0px; font-size: 32px;">Welcome to tatiloradaburada.com</h3>
+<div style="margin-left: 82%; ">
+				<h:commandButton value="Register" style="margin-left:3%; height: 25px"
+				type="submit" action="registar.xhtml" />
+
+			<h:commandButton value="LOGIN" style="margin-left:3%; height: 25px"
+				type="submit" action="login.xhtml" />
+		</div>
+	</h:form>
+	<div
+		style="border: 1px black solid; background-color: #DDD; padding: 8px; padding-bottom: 50px; margin-top: 15px;">
+		<h1>REGISTER AS...</h1>
+		<a href="RegistrationR.xhtml"
+			style="padding: 50px; color: black; display: block; border: 1px black solid; font-size: 36px; font-weight: bold; margin-left: 35%; padding-left: 5%; margin-right: 30%; padding-right: 5%; margin-top: 50px; background-color: grey;">User</a>
+		<a href="RegistrationHO.xhtml"
+			style="padding: 50px; color: black; display: block; border: 1px black solid; font-size: 36px; font-weight: bold; margin-left: 35%; padding-left: 5%; margin-right: 30%; padding-right: 5%; margin-top: 50px; background-color: grey;">Hotel
+			Owner</a>
+	</div>
+</h:body>
+
+
+
+</html>

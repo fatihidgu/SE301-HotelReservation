@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Admin Page</title>
+</h:head>
+<h:body>
+<h:form id="header" style="margin-top: 2%; border: 1px solid black; height: 120px; width: 100%; background-color: #8FBC8F">
+<div style="float: left; margin-top: 0.8%; margin-left: 1%">
+<h:commandLink id="ho-logo-id"  action="VisitorPage.xhtml">
+<h:graphicImage url="/resources\images\logo.png" style="width: 100px; height: 100px;"></h:graphicImage>
+</h:commandLink>
+</div>
+		<h3 style="margin-bottom: 0px; font-size: 32px;">Admin PAge</h3>
+<div style="margin-left: 82%; ">
+<h:commandLink id="ho-name-id" action="registerUser.xhtml" >
+<h:outputText value="#{VisitorPageBean.userna}" ></h:outputText>
+</h:commandLink>
+<h:commandButton value="LOGOUT" style="margin-left:3%; height: 25px" type="submit" actionListener="#{LoginBean.logout}" action="VisitorPage1.xhtml" />
+
+</div>
+</h:form>
+
+<h:form id="menu" style="margin-top: 2%; border: 1px solid black; width: 100%">
+    <p:growl id="msgs" showDetail="true" />
+    <p:tabView orientation="left" style="height: auto">
+    
+    
+        <p:tab title="Registered Users">
+            <h:panelGrid columns="2" cellpadding="10">
+            <p:dataTable var="regUser" value="#{AdminBean.regUser}" >
+            	<p:column headerText="Name">
+            		<h:outputText value="#{regUser.name}" />
+    			</p:column>
+    			<p:column headerText="Lastname">
+        			<h:outputText value="#{regUser.lastName}" />
+    			</p:column>
+    			<p:column headerText="Email">
+        			<h:outputText value="#{regUser.email}" />
+    			</p:column>
+    				<p:column> 
+<p:growl id="message" showDetail="true" />  
+<p:commandButton value="Delete" actionListener="#{AdminBean.delete(regUser.oldid)}" update="message"  action="#{AdminBean.reload()}">  
+<p:confirm header="Confirmation" message="Are you sure you want to delete this Registered User ?" icon="ui-icon-alert" />  
+</p:commandButton>  
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  
+<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+</p:confirmDialog>  
+        		</p:column>
+			</p:dataTable>
+            </h:panelGrid>
+        </p:tab>
+        
+        
+        
+        <p:tab title="Hotel Owners">
+            <h:panelGrid columns="2" cellpadding="10">
+         
+            	<p:dataTable var="hoOwner" value="#{AdminBean.hoOwner}">
+    			<p:column headerText="Name">
+        			<h:outputText value="#{hoOwner.name}" />
+    			</p:column>
+    			<p:column headerText="Lastname">
+        			<h:outputText value="#{hoOwner.lastName}" />
+    			</p:column>
+    			<p:column headerText="Email">
+        			<h:outputText value="#{hoOwner.email}" />
+    			</p:column>    				<p:column> 
+<p:growl id="message" showDetail="true" />  
+<p:commandButton value="Delete" actionListener="#{AdminBean.delete(hoOwner.oldid)}" update="message"  action="#{AdminBean.reload()}">  
+<p:confirm header="Confirmation" message="Are you sure you want to delete this Hotel Owner ?" icon="ui-icon-alert" />  
+</p:commandButton>  
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  
+<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+</p:confirmDialog>  
+        		</p:column>
+				</p:dataTable>
+				 
+            </h:panelGrid>
+            </p:tab>
+        <p:tab title="Accept Hotel">
+            <h:panelGrid columns="2" cellpadding="10">
+            	<p:dataTable var="hotelss" value="#{AdminBean.hotelss}">
+            	<p:column headerText="Hotel Owner Email">
+        			<h:outputText value="#{hotelss.hemail}" />
+    			</p:column>
+    			<p:column headerText="Hotel name">
+        			<h:outputText value="#{hotelss.name}" />
+    			</p:column>
+    			<p:column headerText="Location">
+        			<h:outputText value="#{hotelss.location}" />
+    			</p:column>
+    			<p:column> 
+<p:growl id="message" showDetail="true" />  
+<p:commandButton value="Accept" actionListener="#{AdminBean.accept(hotelss.oldid,hotelss.name)}" update="message"  action="#{AdminBean.reload()}">  
+<p:confirm header="Confirmation" message="Are you sure to Accept this Hotel  ?" icon="ui-icon-alert" />  
+</p:commandButton>  
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  
+<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+</p:confirmDialog>  
+        		</p:column>
+        		<p:column> 
+<p:growl id="message1" showDetail="true" />  
+<p:commandButton value="Decline" actionListener="#{AdminBean.decline(hotelss.oldid,hotelss.name)}" update="message"  action="#{AdminBean.reload()}">  
+<p:confirm header="Confirmation" message="Are you sure to Decline this Hotel?" icon="ui-icon-alert" />  
+</p:commandButton>  
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  
+<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+</p:confirmDialog>  
+        		</p:column>
+				</p:dataTable>
+            </h:panelGrid>
+             </p:tab>
+
+        <p:tab title="Commets">
+            <h:panelGrid columns="2" cellpadding="10">
+            	<p:dataTable var="comments" value="#{AdminBean.comments}">
+    			<p:column headerText="Username">
+        			<h:outputText value="#{comments.rname}" />
+    			</p:column>
+    			<p:column headerText="Hotelname">
+        			<h:outputText value="#{comments.hname}" />
+    			</p:column>
+    			<p:column headerText="Comment">
+        			<h:outputText value="#{comments.text}" />
+    			</p:column>
+    				<p:column> 
+<p:growl id="message" showDetail="true" />  
+<p:commandButton value="Delete" actionListener="#{AdminBean.deleteComment(comments.oldid)}" update="message"  action="#{AdminBean.reload()}">  
+<p:confirm header="Confirmation" message="Are you sure you want to delete Comment ?" icon="ui-icon-alert" />  
+</p:commandButton>  
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  
+<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+</p:confirmDialog>  
+        		</p:column>
+    			
+				</p:dataTable>
+            </h:panelGrid>
+             </p:tab>
+      
+    </p:tabView>
+</h:form>
+</h:body>
+</html>

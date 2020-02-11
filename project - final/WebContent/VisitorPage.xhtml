@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Registered User Main page</title>
+<style>
+.noheader.ui-datatable table thead {
+display: none;
+}
+</style>
+
+</h:head>
+
+<h:body>
+<h:form id="header"
+style="margin-top: 2%; border: 1px solid black; height: 120px; width: 100%; background-color: #8FBC8F">
+<div style="float: left; margin-top: 0.8%; margin-left: 1%">
+
+<h:commandLink id="ho-logo-id" action="VisitorPage.xhtml">
+<h:graphicImage url="/resources\images\logo.png"
+style="width: 100px; height: 100px;"></h:graphicImage>
+</h:commandLink>
+
+</div>
+<h3 style="margin-bottom: 0px; font-size: 32px;">Welcome to
+tatiloradaburada.com</h3>
+<div style="margin-left: 82%;">
+<h:commandLink id="ho-name-id" action="registerUser.xhtml">
+<h:outputText value="#{VisitorPageBean.userna}"></h:outputText>
+</h:commandLink>
+
+<h:commandButton value="LOGOUT" style="margin-left:3%; height: 25px"
+type="submit" actionListener="#{LoginBean.logout}"
+action="VisitorPage1.xhtml" />
+</div>
+</h:form>
+</h:body>
+
+<h:body
+style="width: 90%;padding-right:5%;padding-left:5%;margin-top:30px;">
+
+<h:body style="width: 100%;">
+<h:form id="hotelName"
+style="margin-top: 8px; border: 1px solid black;padding:5%;padding-top:25px;
+padding-bottom:25px; width: 90%;float:left; background-color: #8FBC8F">
+
+<div style="width: 30%;float:left;">
+<p:inputText id="hotelName" style="font-size:22px;"
+placeholder="Hotel Name" value="#{VisitorPageBean.hotelName}"
+required="true" />
+</div>
+
+<h:commandButton value="Search"
+style="border:1px solid black;float:right;font-size:28px;"
+type="submit" actionListener="#{VisitorPageBean.search}"
+action="VisitorPage.xhtml" />
+
+</h:form>
+</h:body>
+<h:body style="float:left;width: 100%;margin-top:30px;;">
+<h:form
+style="clear:both;float:left;width:25%;padding:5px;margin-top:30px;background-color:#DDD;">
+<div style="clear: both">
+<h3 style="margin-bottom: 0px; font-size: 32px;">Stars</h3>
+<p:selectManyCheckbox id="basic" style="clear:both;font-size:22px;"
+value="#{VisitorPageBean.quality}" layout="pageDirection">
+<f:selectItems value="#{VisitorPageBean.favNumber2Value}"/>
+</p:selectManyCheckbox>
+</div>
+<hr />
+<div style="clear: both">
+<h3 style="margin-bottom: 0px; font-size: 32px;">Location</h3>
+<p:selectManyCheckbox id="ba" style="clear:both;font-size:22px;" layout="pageDirection"
+value="#{VisitorPageBean.location}">
+<f:selectItems value="#{VisitorPageBean.favNumber2Value1}"/>
+</p:selectManyCheckbox>
+</div>
+<h:commandButton value="Filter" type="submit"
+style="height: auto;font-size:24px;margin-top: 2%; margin-right: 8%"
+actionListener="#{VisitorPageBean.filter}"
+action="VisitorPage.xhtml" />
+</h:form>
+<h:form
+style="width:70%;padding:5px;margin-top:30px;float:right;min-height:35px;background-color:green;">
+<h:panelGrid style="clear:both;width:80%;margin:5%;" columns="2"
+cellpadding="10">
+<p:dataTable style="width:100%" var="hoHotels"
+value="#{VisitorPageBean.hoHotels}" styleClass="noheader">
+<p:column style="padding:15px;min-height:150px;">
+<h:commandLink id="ho-namee-id" style="text-decoration: none;"
+actionListener="#{commentBean.takeHotelId(hoHotels.id, hoHotels.name)}"
+action="hotelinfo1.xhtml">
+<h:outputText
+style="font-size:32px;font-weight:bold;text-decoration:none;"
+value="#{hoHotels.name}" />
+<br />
+</h:commandLink>
+
+
+<h:outputText value="in #{hoHotels.location}" />
+<br />
+<h:outputText value="has #{hoHotels.quality} stars" />
+<br />
+
+<h:commandButton value="Make Reservation"
+style="float: right; height: auto;font-size:26px;margin-top: 2%; margin-right: 8%"
+actionListener="#{VisitorPageBean.HotelInfo(hoHotels.name,hoHotels.id)}"
+action="makeReservation.xhtml" />
+
+</p:column>
+</p:dataTable>
+</h:panelGrid>
+
+
+</h:form>
+
+</h:body>
+
+</h:body>
+
+
+</html>

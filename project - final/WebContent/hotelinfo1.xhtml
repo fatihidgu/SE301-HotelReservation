@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 
+    <h:body>
+    	<h:form id="header"
+		style="margin-top: 2%; border: 1px solid black; height: 120px; width: 100%; background-color: #8FBC8F">
+		<div style="float: left; margin-top: 0.8%; margin-left: 1%">
+			<h:commandLink id="ho-logo-id" action="VisitorPage.xhtml">
+				<h:graphicImage url="/resources\images\logo.png"
+					style="width: 100px; height: 100px;"></h:graphicImage>
+			</h:commandLink>
+		</div>
+				<h3 style="margin-bottom: 0px; font-size: 32px;">tatiloradaburada.com    Hotel Information</h3>
+<div style="margin-left: 82%; ">
+<h:commandLink id="ho-name-id" action="registerUser.xhtml" >
+<h:outputText value="#{VisitorPageBean.userna}" ></h:outputText>
+</h:commandLink>
+<h:commandButton value="LOGOUT" style="margin-left:3%; height: 25px" type="submit" actionListener="#{LoginBean.logout}" action="VisitorPage1.xhtml"/>
+
+		</div>
+	</h:form>
+            <p:tab title="My Hotels">
+            <h:outputText style=" font-size: 20px; text-align:center; font-weight:bold" value="Name " />
+        			<h:outputText  style=" font-size: 20px;" value="#{commentBean.hotelname}" />
+        			<br/>
+        			<h:outputText style="font-size: 20px; text-align:center; font-weight:bold" value="Location " />
+        			<h:outputText value="#{commentBean.location}" />
+        			<br/>
+        			<h:outputText style="font-size: 20px; text-align:center; font-weight:bold" value="Quality " />
+        			<h:outputText  style=" font-size: 20px;" value="#{commentBean.quality}" />
+        			<br/><br/>
+        			<h:outputText style="font-size: 20px; text-align:center; font-weight:bold" value="Cost for standart room " />
+        			<h:outputText style=" font-size: 20px;" value="#{commentBean.costs}" />
+        			<br/>
+        			<h:outputText style="font-size: 20px; text-align:center; font-weight:bold" value="Vacant room for standart room " />
+        			<h:outputText style=" font-size: 20px;"  value="#{commentBean.vrooms}" />
+        			<br/><br/>
+        			<h:outputText style="font-size: 20px; text-align:center; font-weight:bold" value="Cost for executive room " />
+        			<h:outputText style=" font-size: 20px;" value="#{commentBean.coste}" />
+        			<br/>
+        			<h:outputText style="font-size: 20px; text-align:center; font-weight:bold" value="Vacant room for executive	 room  " />
+        			<h:outputText  style=" font-size: 20px;" value="#{commentBean.vroome}" />
+        			<br/><br/>
+        			<h:outputText style="font-size: 20px; text-align:center; font-weight:bold" value="Cost for presidential room  " />
+        			<h:outputText  style=" font-size: 20px;" value="#{commentBean.costp}" />
+        			<br/>
+        				<h:outputText style="font-size: 20px; text-align:center; font-weight:bold" value="Vacant room for presidential room  " />
+        			<h:outputText value="#{commentBean.vroomp}" />
+    			
+            <h:panelGrid columns="2" cellpadding="10">
+            		<p:dataTable var="commentt" value="#{commentBean.commentt}">
+    			
+    			<p:column style="font-size: 20px; text-align:center;" headerText="Comments">
+        			<br/><h:outputText style=" font-size: 20px;" value="#{commentt.text}" /><br/>
+    			</p:column>			
+			</p:dataTable>
+            </h:panelGrid>
+        </p:tab>
+    
+ 
+</h:body>
+</html>

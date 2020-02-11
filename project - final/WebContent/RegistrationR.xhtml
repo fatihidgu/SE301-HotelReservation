@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	>
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Registration</title>
+</h:head>
+<h:body>
+	<h:form id="header"
+		style="margin-top: 2%; border: 1px solid black; height: 120px; width: 100%; background-color: #8FBC8F">
+		<div style="float: left; margin-top: 0.8%; margin-left: 1%">
+			<h:commandLink id="ho-logo-id" action="VisitorPage1.xhtml">
+				<h:graphicImage url="/resources\images\logo.png"
+					style="width: 100px; height: 100px;"></h:graphicImage>
+			</h:commandLink>
+		</div>
+				<h3 style="margin-bottom: 0px; font-size: 32px;">User Registration</h3>
+<div style="margin-left: 82%; ">
+			<h:commandButton value="Register"
+				style="margin-left:3%; height: 25px" type="submit"
+				action="registar.xhtml" />
+
+			<h:commandButton value="LOGIN" style="margin-left:3%; height: 25px"
+				type="submit" action="login.xhtml" />
+		</div>
+	</h:form>
+</h:body>
+
+
+
+<h:form id="enterInformation"
+	style="margin-top: 2%; border: 1px solid black; width: 100%; height: 600px">
+
+
+	<div style="width: 40%; margin-left: 13%; margin-top: 3%">
+
+		<div style="margin-top: 5%">
+			<div style="float: left">
+				<h:outputText value="*Name: " style="font-size: 14pt"></h:outputText>
+			</div>
+			<div style="float: right">
+				<p:inputText value="#{RegistrationBean.name}" required="true" />
+			</div>
+		</div>
+		<br />
+		<div style="clear: both; margin-top: 5%">
+			<div style="float: left">
+				<h:outputText value="*Lastname: " style="font-size: 14pt"></h:outputText>
+			</div>
+			<div style="float: right">
+				<p:inputText value="#{RegistrationBean.lastName}" required="true" />
+			</div>
+		</div>
+		<br />
+		<div style="margin-top: 5%">
+			<div style="float: left">
+				<h:outputText value="*E-mail " style="font-size: 14pt"></h:outputText>
+			</div>
+			<div style="float: right">
+				<p:inputText id="email" required="true" label="email" size="20"
+					requiredMessage="Please enter your email address."
+					validatorMessage="Invalid email format"
+					value="#{RegistrationBean.email}">
+
+					<f:validateRegex
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+				</p:inputText>
+				<p:watermark for="email" value="Email Address *" />
+				<p:message for="email" />
+			</div>
+		</div>
+		<br />
+		<div style="margin-top: 8%">
+			<div style="float: left">
+				<h:outputText value="*Password " style="font-size: 14pt"></h:outputText>
+			</div>
+			<div style="float: right">
+				<p:password value="#{RegistrationBean.password}" required="true" />
+			</div>
+		</div>
+		<br />
+		<div style="margin-top: 3%">
+			<div style="float: left">
+				<h:outputText value="*Phone number: " style="font-size: 14pt"></h:outputText>
+			</div>
+			<div style="float: right">
+				<p:inputText id="pnum" value="#{RegistrationBean.pnumber}"
+					required="true" >
+					  <f:validator validatorId="phoneValidator" />
+				</p:inputText>
+				<p:watermark for="pnum" value="(_ _ _ _ _ _ _)" />
+				 <h:message for = "pnum" style = "color:red" />
+			</div>
+		</div>
+		<br />
+		<div style="margin-top: 5%">
+			<div style="float: left">
+				<h:outputText value="*Birthday: " style="font-size: 14pt"></h:outputText>
+			</div>
+			<div style="float: right">
+				<p:calendar maxdate="#{EditInBean.getMinAge()}"
+					value="#{RegistrationBean.birthDate}" pattern="yyyy-MM-dd"
+					required="true" />
+			</div>
+		</div>
+		<br />
+		<div style="margin-top: 5%">
+			<div style="float: left">
+				<h:outputText value="*Gender " style="font-size: 14pt"></h:outputText>
+				<br />
+			</div>
+			<div style="float: right">
+				<h:selectOneRadio value="#{RegistrationBean.gender}" required="true">
+					<f:selectItem itemValue="m" itemLabel="Male" />
+					<f:selectItem itemValue="f" itemLabel="Female" />
+				</h:selectOneRadio>
+
+			</div>
+		</div>
+		<br />
+
+	</div>
+
+	<br />
+	<h:commandButton value="Register"
+		style="float: left; height: 25px; margin-top: 2%; margin-left: 47%"
+		type="submit" actionListener="#{RegistrationBean.insertR()}"
+		action="login.xhtml" />
+
+</h:form>
+
+
+</html>
